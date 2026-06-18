@@ -47,20 +47,10 @@ button{font-family:inherit;cursor:pointer;border-radius:8px;font-weight:600;bord
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{animation:spin .8s linear infinite}
 
-/* Handbuch styles */
-.ubtn{background:#1e1e1e;border:1px solid #333;padding:20px 10px;text-align:center;cursor:pointer;border-radius:6px}
-.ubtn .uzi{font-size:32px;margin-bottom:6px}
+.ubtn{background:#1e1e1e;border:1px solid #333;padding:18px 10px;text-align:center;cursor:pointer;border-radius:4px}
+.ubtn .uzi{font-size:30px;margin-bottom:5px}
 .ubtn p{font-weight:700;color:#ddd;margin:0}
 .ubtn small{font-size:10px;color:#666}
-.ieo{background:#1a1a1a;border:1px solid #333;padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer}
-.hb-card{background:#1e1e1e;border:1px solid #2a2a2a;cursor:pointer;transition:border-color .2s}
-.hb-card:hover{border-color:#c8391a}
-.hb-card-img{width:100%;height:120px;object-fit:cover;display:block;background:#111}
-.hb-card-body{padding:10px}
-.hb-card-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hb-card-meta{font-size:10px;color:#666}
-.hb-cat-badge{display:inline-block;padding:2px 7px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-
 </style>
 </head>
 <body>
@@ -78,8 +68,8 @@ button{font-family:inherit;cursor:pointer;border-radius:8px;font-weight:600;bord
     <div style="color:#444;font-size:9px;letter-spacing:.5px">WISSENSDATENBANK</div>
   </div>
   <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-    <a href="https://uri2503.github.io/RC-Restore/" target="_blank" style="padding:6px 11px;font-size:12px;background:rgba(255,255,255,.15);color:#fff;text-decoration:none;border-radius:4px;font-weight:600">&#128279; RC Restore</a>
     <button class="xb" style="padding:6px 11px;font-size:12px" onclick="exportData()">&#128190; Sichern</button>
+    <a href="https://uri2503.github.io/RC-Restore/" target="_blank" class="hbtn" style="text-decoration:none;background:#1e3a4c">&#128279; RC Restore</a>
     <button class="xb" style="padding:6px 11px;font-size:12px" onclick="document.getElementById('imp').click()">&#128228; Laden</button>
     <input type="file" id="imp" accept=".json" style="display:none" onchange="importData(this)"/>
     <div style="display:flex;align-items:center;gap:5px">
@@ -180,11 +170,6 @@ button{font-family:inherit;cursor:pointer;border-radius:8px;font-weight:600;bord
 
 <!-- ═══ GESPEICHERT ═══ -->
 <div id="p-gespeichert" style="display:none">
-  <div style="background:#e8f5e9;border:1px solid #a5d6a7;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
-    <span style="font-size:18px">&#128279;</span>
-    <div style="flex:1;font-size:12px;color:#2e7d32"><b>RC Restore Complete Manager</b><br><span style="font-size:11px;color:#555">Anleitungen exportieren und im Projekt-Tagebuch importieren</span></div>
-    <button onclick="exportForRestore()" style="background:#2e7d32;color:#fff;border:none;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer">&#128229; F&uuml;r RC Restore</button>
-  </div>
   <div class="card">
     <div style="padding:11px 14px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center">
       <span style="color:#ccc;font-weight:700;font-size:14px">Gespeicherte Anleitungen</span>
@@ -315,114 +300,9 @@ function buildPrint(steps, query){
   }).join('');
   return '<!DOCTYPE html><html><head><meta charset="utf-8"/><title>KFZ Anleitung</title>'
     +'<style>body{font-family:sans-serif;color:#222;padding:28px 36px;max-width:660px;margin:0 auto}.pb{display:block;margin:18px auto;padding:10px 26px;background:#c0392b;color:#fff;border:none;border-radius:5px;font-size:13px;cursor:pointer}@media print{.pb{display:none}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>'
-    +'<div style="border-bottom:3px solid #1a1a2e;padding-bottom:11px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-end"><div><div style="font-size:19px;font-weight:800;color:#1a1a2e">KFZ Reparaturanleitung</div><div style="font-size:11px;color:#666">'+query+'</div></div><div style="text-align:right"><div style="font-size:9px;color:#999">Erstellt '+date+'</div><div style="background:#c0392b;color:#fff;font-size:8px;padding:2px 6px;border-radius:2px;display:inline-block">AutoGuide AI</div></div></div>'
+    +'<div style="border-bottom:3px solid #1a1a2e;padding-bottom:11px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-end"><div><div style="font-size:19px;font-weight:800;color:#1a1a2e">KFZ Reparaturanleitung</div><div style="font-size:11px;color:#666">'+query+'</div></div><div style="text-align:right"><div style="font-size:9px;color:#999">Erstellt '+date+'</div><div style="background:#c0392b;color:#fff;font-size:8px;padding:2px 6px;border-radius:2px;display:inline-block">RC Know-How</div></div></div>'
     +body+'<button class="pb" onclick="window.print()">Drucken / Als PDF speichern</button>'
-    +'<div style="margin-top:14px;padding-top:8px;border-top:1px solid #eee;font-size:8px;color:#aaa">AutoGuide AI - Alle Angaben ohne Gewaehr</div>
-<!-- ═══ HANDBÜCHER ═══ -->
-<div id="p-handbuch" style="display:none">
-  <div style="padding:12px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-      <div>
-        <div class="sec-t" style="font-size:16px;font-weight:700">&#128218; Handbücher & PDFs</div>
-        <div style="font-size:11px;color:#888;margin-top:2px"><b id="hb-cnt">0</b> Handbücher · <b id="hb-pg">0</b> Seiten · <b id="hb-ocr">0</b> OCR</div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="rb" onclick="hbOpenAdd()">+ Handbuch</button>
-        <button class="rb" style="background:#333" onclick="hbOpenOv('hbIE')">&#8645; Export/Import</button>
-      </div>
-    </div>
-    <!-- Search + filter -->
-    <div style="display:flex;gap:8px;margin-bottom:12px">
-      <input id="hb-search" type="text" class="finp" placeholder="Handbücher suchen…" oninput="hbSearch()" style="flex:1">
-      <select id="hb-cat-filter" class="fsel" onchange="hbSearch()" style="width:140px;background:#1a1a1a;color:#ddd;border:1px solid #333;padding:8px">
-        <option value="">Alle Kategorien</option>
-      </select>
-    </div>
-    <!-- Books grid -->
-    <div id="hb-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px"></div>
-  </div>
-</div>
-
-<!-- Handbuch Add Overlay -->
-<div class="ov" id="hbAdd" style="display:none">
-  <div class="sheet">
-    <div class="hdl"></div>
-    <div class="sc">
-      <div class="sh-title">Neues Handbuch</div>
-      <div class="fg"><label>Titel *</label><input type="text" id="hb-fT" placeholder="z.B. Werkstatthandbuch W107"></div>
-      <div class="fg"><label>Hersteller</label><input type="text" id="hb-fB" placeholder="z.B. Mercedes-Benz"></div>
-      <div class="fg"><label>Jahr</label><input type="text" id="hb-fY" placeholder="z.B. 1971-1989"></div>
-      <div class="fg"><label>Kategorie</label>
-        <select id="hb-fC">
-          <option>Mercedes-Benz</option><option>BMW</option><option>Porsche</option>
-          <option>Elektrik</option><option>Motor</option><option>Getriebe</option>
-          <option>Karosserie</option><option>Fahrwerk</option><option>Allgemein</option>
-        </select>
-      </div>
-      <div class="fg"><label>Farbe</label>
-        <div id="hb-colors" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0">
-        <div class="ubtn" onclick="document.getElementById('hb-fF').click()">
-          <div class="uzi">🖼</div><p>Bilder</p><small>JPG / PNG</small>
-        </div>
-        <div class="ubtn" onclick="document.getElementById('hb-fPDF').click()">
-          <div class="uzi">📄</div><p>PDF</p><small>Wird in Seiten umgewandelt</small>
-        </div>
-      </div>
-      <input type="file" id="hb-fF" accept="image/*" multiple style="display:none" onchange="hbLoadImgs(this)">
-      <input type="file" id="hb-fPDF" accept=".pdf,application/pdf" style="display:none" onchange="hbLoadPDF(this)">
-      <div id="hb-prog" style="display:none;margin:12px 0">
-        <div style="font-size:12px;color:#888;margin-bottom:4px" id="hb-prog-txt">Verarbeite…</div>
-        <div style="background:#333;height:6px"><div id="hb-prog-bar" style="height:100%;background:var(--r);width:0%;transition:width .3s"></div></div>
-      </div>
-      <div id="hb-preview" style="display:flex;flex-wrap:wrap;gap:4px;margin:10px 0;max-height:200px;overflow-y:auto"></div>
-      <button class="rb" style="width:100%;padding:14px;font-size:14px" onclick="hbSaveBook()">Handbuch speichern</button>
-    </div>
-  </div>
-</div>
-
-<!-- Handbuch Viewer -->
-<div class="ov" id="hbBook" style="display:none;background:#111">
-  <div style="position:relative;height:100%;display:flex;flex-direction:column">
-    <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#1a1a1a;border-bottom:1px solid #333">
-      <button onclick="hbCloseBook()" style="background:none;border:none;color:#ddd;font-size:20px;cursor:pointer">&#8592;</button>
-      <div style="flex:1">
-        <div id="hb-book-title" style="font-size:14px;font-weight:700;color:#fff"></div>
-        <div id="hb-book-info" style="font-size:11px;color:#888"></div>
-      </div>
-      <div id="hb-page-nav" style="display:flex;align-items:center;gap:8px">
-        <button onclick="hbNavPage(-1)" style="background:#333;border:none;color:#ddd;padding:6px 12px;cursor:pointer">&#8249;</button>
-        <span id="hb-page-nr" style="font-size:12px;color:#aaa"></span>
-        <button onclick="hbNavPage(1)" style="background:#333;border:none;color:#ddd;padding:6px 12px;cursor:pointer">&#8250;</button>
-      </div>
-      <button onclick="hbOcrPage()" style="background:#333;border:none;color:#aaa;padding:6px 10px;font-size:11px;cursor:pointer">OCR</button>
-    </div>
-    <div id="hb-page-view" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:16px;gap:12px"></div>
-    <div id="hb-ocr-text" style="display:none;background:#1a1a1a;padding:12px;font-size:11px;color:#ccc;max-height:200px;overflow-y:auto;border-top:1px solid #333"></div>
-    <div style="padding:10px;background:#1a1a1a;border-top:1px solid #333">
-      <div id="hb-thumb-strip" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Handbuch Export/Import -->
-<div class="ov" id="hbIE" style="display:none">
-  <div class="sheet">
-    <div class="hdl"></div>
-    <div class="sc">
-      <div class="sh-title">&#8645; Export / Import</div>
-      <p style="font-size:12px;color:#888;margin-bottom:16px">Handbücher werden als komprimiertes JSON mit allen Seiten gespeichert. Daten bleiben dauerhaft auf deinem Gerät (IndexedDB).</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-        <div class="ieo" onclick="hbDoExport()"><span style="font-size:24px">📤</span><div><div style="font-weight:700;margin-bottom:3px">Exportieren</div><div style="font-size:11px;color:#aaa">Alle Handbücher sichern</div></div></div>
-        <label class="ieo"><span style="font-size:24px">📥</span><div><div style="font-weight:700;margin-bottom:3px">Importieren</div><div style="font-size:11px;color:#aaa">Backup laden</div></div><input type="file" accept=".json" style="display:none" onchange="hbDoImport(this)"></label>
-      </div>
-      <button class="rb" style="width:100%" onclick="hbCloseOv('hbIE')">Schließen</button>
-    </div>
-  </div>
-</div>
-
-</body></html>';
+    +'<div style="margin-top:14px;padding-top:8px;border-top:1px solid #eee;font-size:8px;color:#aaa">RC Know-How</div></body></html>';
 }
 
 function openPrint(html){
@@ -703,114 +583,9 @@ function printCode(){
   body+='<div style="font-size:12px;font-weight:700;color:#27ae60;margin:11px 0 3px;border-left:3px solid #27ae60;padding-left:7px">Massnahmen - '+d.her+'</div>';
   body+='<div style="background:#f0fff4;border:1px solid #27ae60;border-radius:6px;padding:10px;font-size:11px;line-height:1.6;color:#222">'+d.hi+'</div>';
   openPrint('<!DOCTYPE html><html><head><meta charset="utf-8"/><title>OBD2 '+d.code+'</title><style>body{font-family:sans-serif;color:#222;padding:28px 36px;max-width:660px;margin:0 auto}.pb{display:block;margin:18px auto;padding:10px 26px;background:#c0392b;color:#fff;border:none;border-radius:5px;font-size:13px;cursor:pointer}@media print{.pb{display:none}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>'
-    +'<div style="border-bottom:3px solid #1a1a2e;padding-bottom:11px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-end"><div><div style="font-size:19px;font-weight:800;color:#1a1a2e">OBD2 Fehlercode</div><div style="font-size:15px;font-weight:700;color:#c0392b;margin-top:2px">'+d.code+' - '+d.e.titel+'</div></div><div style="text-align:right"><div style="font-size:9px;color:#999">Erstellt '+date+'</div><div style="background:#c0392b;color:#fff;font-size:8px;padding:2px 6px;border-radius:2px;display:inline-block">AutoGuide AI</div></div></div>'
+    +'<div style="border-bottom:3px solid #1a1a2e;padding-bottom:11px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-end"><div><div style="font-size:19px;font-weight:800;color:#1a1a2e">OBD2 Fehlercode</div><div style="font-size:15px;font-weight:700;color:#c0392b;margin-top:2px">'+d.code+' - '+d.e.titel+'</div></div><div style="text-align:right"><div style="font-size:9px;color:#999">Erstellt '+date+'</div><div style="background:#c0392b;color:#fff;font-size:8px;padding:2px 6px;border-radius:2px;display:inline-block">RC Know-How</div></div></div>'
     +body+'<button class="pb" onclick="window.print()">Drucken / Als PDF speichern</button>'
-    +'<div style="margin-top:14px;padding-top:8px;border-top:1px solid #eee;font-size:8px;color:#aaa">AutoGuide AI - Alle Angaben ohne Gewaehr - Fachwerkstatt konsultieren</div>
-<!-- ═══ HANDBÜCHER ═══ -->
-<div id="p-handbuch" style="display:none">
-  <div style="padding:12px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-      <div>
-        <div class="sec-t" style="font-size:16px;font-weight:700">&#128218; Handbücher & PDFs</div>
-        <div style="font-size:11px;color:#888;margin-top:2px"><b id="hb-cnt">0</b> Handbücher · <b id="hb-pg">0</b> Seiten · <b id="hb-ocr">0</b> OCR</div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="rb" onclick="hbOpenAdd()">+ Handbuch</button>
-        <button class="rb" style="background:#333" onclick="hbOpenOv('hbIE')">&#8645; Export/Import</button>
-      </div>
-    </div>
-    <!-- Search + filter -->
-    <div style="display:flex;gap:8px;margin-bottom:12px">
-      <input id="hb-search" type="text" class="finp" placeholder="Handbücher suchen…" oninput="hbSearch()" style="flex:1">
-      <select id="hb-cat-filter" class="fsel" onchange="hbSearch()" style="width:140px;background:#1a1a1a;color:#ddd;border:1px solid #333;padding:8px">
-        <option value="">Alle Kategorien</option>
-      </select>
-    </div>
-    <!-- Books grid -->
-    <div id="hb-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px"></div>
-  </div>
-</div>
-
-<!-- Handbuch Add Overlay -->
-<div class="ov" id="hbAdd" style="display:none">
-  <div class="sheet">
-    <div class="hdl"></div>
-    <div class="sc">
-      <div class="sh-title">Neues Handbuch</div>
-      <div class="fg"><label>Titel *</label><input type="text" id="hb-fT" placeholder="z.B. Werkstatthandbuch W107"></div>
-      <div class="fg"><label>Hersteller</label><input type="text" id="hb-fB" placeholder="z.B. Mercedes-Benz"></div>
-      <div class="fg"><label>Jahr</label><input type="text" id="hb-fY" placeholder="z.B. 1971-1989"></div>
-      <div class="fg"><label>Kategorie</label>
-        <select id="hb-fC">
-          <option>Mercedes-Benz</option><option>BMW</option><option>Porsche</option>
-          <option>Elektrik</option><option>Motor</option><option>Getriebe</option>
-          <option>Karosserie</option><option>Fahrwerk</option><option>Allgemein</option>
-        </select>
-      </div>
-      <div class="fg"><label>Farbe</label>
-        <div id="hb-colors" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0">
-        <div class="ubtn" onclick="document.getElementById('hb-fF').click()">
-          <div class="uzi">🖼</div><p>Bilder</p><small>JPG / PNG</small>
-        </div>
-        <div class="ubtn" onclick="document.getElementById('hb-fPDF').click()">
-          <div class="uzi">📄</div><p>PDF</p><small>Wird in Seiten umgewandelt</small>
-        </div>
-      </div>
-      <input type="file" id="hb-fF" accept="image/*" multiple style="display:none" onchange="hbLoadImgs(this)">
-      <input type="file" id="hb-fPDF" accept=".pdf,application/pdf" style="display:none" onchange="hbLoadPDF(this)">
-      <div id="hb-prog" style="display:none;margin:12px 0">
-        <div style="font-size:12px;color:#888;margin-bottom:4px" id="hb-prog-txt">Verarbeite…</div>
-        <div style="background:#333;height:6px"><div id="hb-prog-bar" style="height:100%;background:var(--r);width:0%;transition:width .3s"></div></div>
-      </div>
-      <div id="hb-preview" style="display:flex;flex-wrap:wrap;gap:4px;margin:10px 0;max-height:200px;overflow-y:auto"></div>
-      <button class="rb" style="width:100%;padding:14px;font-size:14px" onclick="hbSaveBook()">Handbuch speichern</button>
-    </div>
-  </div>
-</div>
-
-<!-- Handbuch Viewer -->
-<div class="ov" id="hbBook" style="display:none;background:#111">
-  <div style="position:relative;height:100%;display:flex;flex-direction:column">
-    <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#1a1a1a;border-bottom:1px solid #333">
-      <button onclick="hbCloseBook()" style="background:none;border:none;color:#ddd;font-size:20px;cursor:pointer">&#8592;</button>
-      <div style="flex:1">
-        <div id="hb-book-title" style="font-size:14px;font-weight:700;color:#fff"></div>
-        <div id="hb-book-info" style="font-size:11px;color:#888"></div>
-      </div>
-      <div id="hb-page-nav" style="display:flex;align-items:center;gap:8px">
-        <button onclick="hbNavPage(-1)" style="background:#333;border:none;color:#ddd;padding:6px 12px;cursor:pointer">&#8249;</button>
-        <span id="hb-page-nr" style="font-size:12px;color:#aaa"></span>
-        <button onclick="hbNavPage(1)" style="background:#333;border:none;color:#ddd;padding:6px 12px;cursor:pointer">&#8250;</button>
-      </div>
-      <button onclick="hbOcrPage()" style="background:#333;border:none;color:#aaa;padding:6px 10px;font-size:11px;cursor:pointer">OCR</button>
-    </div>
-    <div id="hb-page-view" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:16px;gap:12px"></div>
-    <div id="hb-ocr-text" style="display:none;background:#1a1a1a;padding:12px;font-size:11px;color:#ccc;max-height:200px;overflow-y:auto;border-top:1px solid #333"></div>
-    <div style="padding:10px;background:#1a1a1a;border-top:1px solid #333">
-      <div id="hb-thumb-strip" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Handbuch Export/Import -->
-<div class="ov" id="hbIE" style="display:none">
-  <div class="sheet">
-    <div class="hdl"></div>
-    <div class="sc">
-      <div class="sh-title">&#8645; Export / Import</div>
-      <p style="font-size:12px;color:#888;margin-bottom:16px">Handbücher werden als komprimiertes JSON mit allen Seiten gespeichert. Daten bleiben dauerhaft auf deinem Gerät (IndexedDB).</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-        <div class="ieo" onclick="hbDoExport()"><span style="font-size:24px">📤</span><div><div style="font-weight:700;margin-bottom:3px">Exportieren</div><div style="font-size:11px;color:#aaa">Alle Handbücher sichern</div></div></div>
-        <label class="ieo"><span style="font-size:24px">📥</span><div><div style="font-weight:700;margin-bottom:3px">Importieren</div><div style="font-size:11px;color:#aaa">Backup laden</div></div><input type="file" accept=".json" style="display:none" onchange="hbDoImport(this)"></label>
-      </div>
-      <button class="rb" style="width:100%" onclick="hbCloseOv('hbIE')">Schließen</button>
-    </div>
-  </div>
-</div>
-
-</body></html>');
+    +'<div style="margin-top:14px;padding-top:8px;border-top:1px solid #eee;font-size:8px;color:#aaa">RC Know-How - Fachwerkstatt konsultieren</div></body></html>');
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1073,112 +848,7 @@ function printAngebot(){
     +(f.mwst?'<tr><td colspan="4" style="padding:5px 8px;text-align:right;color:#666">zzgl. MwSt. '+mwstSatz+'%</td><td style="padding:5px 8px;text-align:right">'+mwstBetrag.toFixed(2)+' \u20ac</td></tr>':'')
     +'<tr class="tr"><td colspan="4" style="padding:8px;text-align:right">Gesamtbetrag '+(f.mwst?'brutto':'netto')+'</td><td style="padding:8px;text-align:right;font-size:14px">'+brutto.toFixed(2)+' \u20ac</td></tr></tbody></table>'
     +'<div style="margin-top:22px;padding-top:10px;border-top:1px solid #ddd;font-size:10px;color:#888">Dieses Angebot ist freibleibend. Gueltig bis: '+gueltig+'. '+(f.mwst?'Alle Preise zzgl. '+mwstSatz+'% MwSt.':'Kleinunternehmerregelung gem. \u00a7 19 UStG.')+'</div>'
-    +'<button class="pb" onclick="window.print()">&#128424; Drucken / Als PDF speichern</button>
-<!-- ═══ HANDBÜCHER ═══ -->
-<div id="p-handbuch" style="display:none">
-  <div style="padding:12px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-      <div>
-        <div class="sec-t" style="font-size:16px;font-weight:700">&#128218; Handbücher & PDFs</div>
-        <div style="font-size:11px;color:#888;margin-top:2px"><b id="hb-cnt">0</b> Handbücher · <b id="hb-pg">0</b> Seiten · <b id="hb-ocr">0</b> OCR</div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="rb" onclick="hbOpenAdd()">+ Handbuch</button>
-        <button class="rb" style="background:#333" onclick="hbOpenOv('hbIE')">&#8645; Export/Import</button>
-      </div>
-    </div>
-    <!-- Search + filter -->
-    <div style="display:flex;gap:8px;margin-bottom:12px">
-      <input id="hb-search" type="text" class="finp" placeholder="Handbücher suchen…" oninput="hbSearch()" style="flex:1">
-      <select id="hb-cat-filter" class="fsel" onchange="hbSearch()" style="width:140px;background:#1a1a1a;color:#ddd;border:1px solid #333;padding:8px">
-        <option value="">Alle Kategorien</option>
-      </select>
-    </div>
-    <!-- Books grid -->
-    <div id="hb-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px"></div>
-  </div>
-</div>
-
-<!-- Handbuch Add Overlay -->
-<div class="ov" id="hbAdd" style="display:none">
-  <div class="sheet">
-    <div class="hdl"></div>
-    <div class="sc">
-      <div class="sh-title">Neues Handbuch</div>
-      <div class="fg"><label>Titel *</label><input type="text" id="hb-fT" placeholder="z.B. Werkstatthandbuch W107"></div>
-      <div class="fg"><label>Hersteller</label><input type="text" id="hb-fB" placeholder="z.B. Mercedes-Benz"></div>
-      <div class="fg"><label>Jahr</label><input type="text" id="hb-fY" placeholder="z.B. 1971-1989"></div>
-      <div class="fg"><label>Kategorie</label>
-        <select id="hb-fC">
-          <option>Mercedes-Benz</option><option>BMW</option><option>Porsche</option>
-          <option>Elektrik</option><option>Motor</option><option>Getriebe</option>
-          <option>Karosserie</option><option>Fahrwerk</option><option>Allgemein</option>
-        </select>
-      </div>
-      <div class="fg"><label>Farbe</label>
-        <div id="hb-colors" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0">
-        <div class="ubtn" onclick="document.getElementById('hb-fF').click()">
-          <div class="uzi">🖼</div><p>Bilder</p><small>JPG / PNG</small>
-        </div>
-        <div class="ubtn" onclick="document.getElementById('hb-fPDF').click()">
-          <div class="uzi">📄</div><p>PDF</p><small>Wird in Seiten umgewandelt</small>
-        </div>
-      </div>
-      <input type="file" id="hb-fF" accept="image/*" multiple style="display:none" onchange="hbLoadImgs(this)">
-      <input type="file" id="hb-fPDF" accept=".pdf,application/pdf" style="display:none" onchange="hbLoadPDF(this)">
-      <div id="hb-prog" style="display:none;margin:12px 0">
-        <div style="font-size:12px;color:#888;margin-bottom:4px" id="hb-prog-txt">Verarbeite…</div>
-        <div style="background:#333;height:6px"><div id="hb-prog-bar" style="height:100%;background:var(--r);width:0%;transition:width .3s"></div></div>
-      </div>
-      <div id="hb-preview" style="display:flex;flex-wrap:wrap;gap:4px;margin:10px 0;max-height:200px;overflow-y:auto"></div>
-      <button class="rb" style="width:100%;padding:14px;font-size:14px" onclick="hbSaveBook()">Handbuch speichern</button>
-    </div>
-  </div>
-</div>
-
-<!-- Handbuch Viewer -->
-<div class="ov" id="hbBook" style="display:none;background:#111">
-  <div style="position:relative;height:100%;display:flex;flex-direction:column">
-    <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#1a1a1a;border-bottom:1px solid #333">
-      <button onclick="hbCloseBook()" style="background:none;border:none;color:#ddd;font-size:20px;cursor:pointer">&#8592;</button>
-      <div style="flex:1">
-        <div id="hb-book-title" style="font-size:14px;font-weight:700;color:#fff"></div>
-        <div id="hb-book-info" style="font-size:11px;color:#888"></div>
-      </div>
-      <div id="hb-page-nav" style="display:flex;align-items:center;gap:8px">
-        <button onclick="hbNavPage(-1)" style="background:#333;border:none;color:#ddd;padding:6px 12px;cursor:pointer">&#8249;</button>
-        <span id="hb-page-nr" style="font-size:12px;color:#aaa"></span>
-        <button onclick="hbNavPage(1)" style="background:#333;border:none;color:#ddd;padding:6px 12px;cursor:pointer">&#8250;</button>
-      </div>
-      <button onclick="hbOcrPage()" style="background:#333;border:none;color:#aaa;padding:6px 10px;font-size:11px;cursor:pointer">OCR</button>
-    </div>
-    <div id="hb-page-view" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:16px;gap:12px"></div>
-    <div id="hb-ocr-text" style="display:none;background:#1a1a1a;padding:12px;font-size:11px;color:#ccc;max-height:200px;overflow-y:auto;border-top:1px solid #333"></div>
-    <div style="padding:10px;background:#1a1a1a;border-top:1px solid #333">
-      <div id="hb-thumb-strip" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Handbuch Export/Import -->
-<div class="ov" id="hbIE" style="display:none">
-  <div class="sheet">
-    <div class="hdl"></div>
-    <div class="sc">
-      <div class="sh-title">&#8645; Export / Import</div>
-      <p style="font-size:12px;color:#888;margin-bottom:16px">Handbücher werden als komprimiertes JSON mit allen Seiten gespeichert. Daten bleiben dauerhaft auf deinem Gerät (IndexedDB).</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-        <div class="ieo" onclick="hbDoExport()"><span style="font-size:24px">📤</span><div><div style="font-weight:700;margin-bottom:3px">Exportieren</div><div style="font-size:11px;color:#aaa">Alle Handbücher sichern</div></div></div>
-        <label class="ieo"><span style="font-size:24px">📥</span><div><div style="font-weight:700;margin-bottom:3px">Importieren</div><div style="font-size:11px;color:#aaa">Backup laden</div></div><input type="file" accept=".json" style="display:none" onchange="hbDoImport(this)"></label>
-      </div>
-      <button class="rb" style="width:100%" onclick="hbCloseOv('hbIE')">Schließen</button>
-    </div>
-  </div>
-</div>
-
-</body></html>';
+    +'<button class="pb" onclick="window.print()">&#128424; Drucken / Als PDF speichern</button></body></html>';
   openPrint(html);
 }
 
@@ -1252,7 +922,7 @@ function importData(inp){
       if(d.firma)ST.firma=d.firma;if(d.ss)ST.ss=d.ss;if(d.kalks)ST.kalks=d.kalks;
       SS('ag_saved',ST.saved);SS('ag_vids',ST.videos);SS('ag_cats',ST.userCats);
       SS('ag_firma',ST.firma);SS('ag_ss',ST.ss);SS('ag_kalk',ST.kalks);
-      rebuildCats();updateTabLabels();alert('Geladen: '+ST.saved.length+' Anleitungen, '+ST.videos.length+' Videos, '+0+' Kalkulationen');
+      rebuildCats();updateTabLabels();alert('Geladen: '+ST.saved.length+' Anleitungen, '+ST.videos.length+' Videos, '+ST.kalks.length+' Kalkulationen');
     }catch(err){alert('Fehler beim Laden: '+err.message);}
   };
   r.readAsText(file);inp.value='';
@@ -1287,492 +957,85 @@ window.addEventListener('DOMContentLoaded', function(){
   });
 });
 
-// ── RC RESTORE BRÜCKE ────────────────────────────────────────────
-function exportForRestore(){
-  var saved=ST.saved||[];
-  if(saved.length===0){alert("Keine gespeicherten Anleitungen vorhanden.");return;}
-  var data={
-    quelle:"RC_KnowHow",
-    exportiert:new Date().toISOString(),
-    anleitungen:saved.map(function(s){
-      return {
-        titel:s.anfrage||s.query||"Anleitung",
-        fahrzeug:s.kfz||"",
-        datum:s.datum||s.date||"",
-        schritte:(s.schritte||s.steps||[]).map(function(st){return {text:st.text||st};})
-      };
-    })
-  };
-  var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  var a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="RC_KnowHow_Export_"+new Date().toISOString().slice(0,10)+".json";
-  a.click();
-}
-
-// ══════════════════════════════════════════════════════════════
-// HANDBUCH MODULE — IndexedDB PDF/Image Archive
-// ══════════════════════════════════════════════════════════════
-var HB_DB_NAME = 'rc_knowhow_handbuch_v1';
-var HB_BOOKS = [];
-var HB_PEND = [];
-var HB_CUR_BOOK = null;
-var HB_CUR_PAGE = 0;
-var HB_SEL_COLOR = '#c8391a';
-
-var HB_COLORS = ['#c8391a','#e67e22','#2ecc71','#3498db','#9b59b6','#1abc9c','#f39c12','#95a5a6'];
-
-// IndexedDB
-function hbOpenDB(){
-  return new Promise(function(res,rej){
-    var req=indexedDB.open(HB_DB_NAME,1);
-    req.onupgradeneeded=function(e){
-      var db=e.target.result;
-      if(!db.objectStoreNames.contains('books')) db.createObjectStore('books',{keyPath:'id'});
-      if(!db.objectStoreNames.contains('pages')) db.createObjectStore('pages',{keyPath:'pid'});
-    };
-    req.onsuccess=function(e){res(e.target.result);};
-    req.onerror=function(e){rej(e);};
-  });
-}
-async function hbDbGetAll(store){
-  var db=await hbOpenDB();
-  return new Promise(function(res,rej){
-    var tx=db.transaction(store,'readonly');
-    var req=tx.objectStore(store).getAll();
-    req.onsuccess=function(){res(req.result);};
-    req.onerror=rej;
-  });
-}
-async function hbDbPut(store,obj){
-  var db=await hbOpenDB();
-  return new Promise(function(res,rej){
-    var tx=db.transaction(store,'readwrite');
-    tx.objectStore(store).put(obj);
-    tx.oncomplete=res; tx.onerror=rej;
-  });
-}
-async function hbDbDelete(store,key){
-  var db=await hbOpenDB();
-  return new Promise(function(res,rej){
-    var tx=db.transaction(store,'readwrite');
-    tx.objectStore(store).delete(key);
-    tx.oncomplete=res; tx.onerror=rej;
-  });
-}
-
-// Init Handbuch module
-async function hbInit(){
-  HB_BOOKS=await hbDbGetAll('books');
-  hbRender();
-  hbUpdateStats();
-  hbPopCatFilter();
-}
-
-function hbPopCatFilter(){
-  var sel=document.getElementById('hb-cat-filter');
-  if(!sel)return;
-  var cats=[''];
-  for(var i=0;i<HB_BOOKS.length;i++){if(HB_BOOKS[i].cat&&cats.indexOf(HB_BOOKS[i].cat)<0)cats.push(HB_BOOKS[i].cat);}
-  sel.innerHTML='<option value="">Alle Kategorien</option>'+cats.slice(1).map(function(c){return '<option value="'+c+'">'+c+'</option>';}).join('');
-}
-
-function hbRender(){
-  var q=(document.getElementById('hb-search')||{}).value||'';
-  var cat=(document.getElementById('hb-cat-filter')||{}).value||'';
-  var grid=document.getElementById('hb-grid');
-  if(!grid)return;
-  var books=HB_BOOKS.filter(function(b){
-    if(cat&&b.cat!==cat)return false;
-    if(q){var ql=q.toLowerCase();return (b.title||'').toLowerCase().indexOf(ql)>=0||(b.brand||'').toLowerCase().indexOf(ql)>=0;}
-    return true;
-  });
-  if(books.length===0){
-    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:48px;color:#555"><div style="font-size:48px;margin-bottom:12px">📚</div>Noch keine Handbücher<br><small>PDF oder Bilder hinzufügen</small></div>';
-    return;
-  }
-  grid.innerHTML=books.map(function(b){
-    var cover=b.cover?'<img src="'+b.cover+'" class="hb-card-img" loading="lazy">':'<div style="height:120px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:40px">📄</div>';
-    return '<div class="hb-card" onclick="hbOpenBook(''+b.id+'')">'
-      +cover
-      +'<div class="hb-card-body">'
-      +'<div class="hb-cat-badge" style="background:'+(b.color||'#c8391a')+'22;color:'+(b.color||'#c8391a')+'">'+( b.cat||'Allgemein')+'</div>'
-      +'<div class="hb-card-title">'+b.title+'</div>'
-      +'<div class="hb-card-meta">'+(b.brand?b.brand+' · ':'')+b.pages+' Seiten'+(b.year?' · '+b.year:'')+'</div>'
-      +'</div>'
-      +'<div style="display:flex;justify-content:space-between;padding:6px 10px;border-top:1px solid #2a2a2a">'
-      +'<button onclick="event.stopPropagation();hbDelBook(''+b.id+'')" style="background:none;border:none;color:#555;cursor:pointer;font-size:11px">&#128465; Löschen</button>'
-      +'<span style="font-size:10px;color:#555">'+( b.ocrCount||0)+' OCR</span>'
-      +'</div>'
-      +'</div>';
-  }).join('');
-}
-
-function hbSearch(){hbRender();}
-
-function hbUpdateStats(){
-  var el1=document.getElementById('hb-cnt');
-  var el2=document.getElementById('hb-pg');
-  var el3=document.getElementById('hb-ocr');
-  if(el1) el1.textContent=HB_BOOKS.length;
-  if(el2) el2.textContent=HB_BOOKS.reduce(function(s,b){return s+(b.pages||0);},0);
-  if(el3) el3.textContent=HB_BOOKS.reduce(function(s,b){return s+(b.ocrCount||0);},0);
-}
-
-function hbOpenAdd(){
-  // Init color picker
-  var cp=document.getElementById('hb-colors');
-  if(cp) cp.innerHTML=HB_COLORS.map(function(c){
-    return '<div onclick="HB_SEL_COLOR=''+c+'';hbPickCol(this)" style="width:28px;height:28px;background:'+c+';cursor:pointer;border-radius:50%;border:3px solid '+(c===HB_SEL_COLOR?'#fff':'transparent')+'"></div>';
-  }).join('');
-  HB_PEND=[];
-  document.getElementById('hb-preview').innerHTML='';
-  hbShowOv('hbAdd');
-}
-
-function hbPickCol(el){
-  document.querySelectorAll('#hb-colors div').forEach(function(d){d.style.borderColor='transparent';});
-  el.style.borderColor='#fff';
-}
-
-async function hbLoadImgs(inp){
-  var files=Array.from(inp.files);
-  hbShowProg('Lade Bilder…',0);
-  for(var i=0;i<files.length;i++){
-    var url=await new Promise(function(res){var r=new FileReader();r.onload=function(e){res(e.target.result);};r.readAsDataURL(files[i]);});
-    var comp=await hbCompress(url,1200,0.8);
-    HB_PEND.push({src:comp,ocr:'',title:''});
-    hbShowProg('Bild '+(i+1)+'/'+files.length,Math.round((i+1)/files.length*100));
-  }
-  hbShowProg(null,100);
-  hbShowPreview();
-}
-
-async function hbLoadPDF(inp){
-  var file=inp.files[0]; if(!file)return;
-  hbShowProg('Lade PDF…',5);
-  try{
-    var ab=await file.arrayBuffer();
-    if(typeof pdfjsLib==='undefined'){
-      // Load PDF.js dynamically
-      await new Promise(function(res,rej){
-        var s=document.createElement('script');
-        s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-        s.onload=res;s.onerror=rej;
-        document.head.appendChild(s);
-      });
-      pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    }
-    var pdf=await pdfjsLib.getDocument({data:ab}).promise;
-    var total=pdf.numPages;
-    hbShowProg('Konvertiere '+total+' Seiten…',10);
-    for(var pg=1;pg<=total;pg++){
-      var page=await pdf.getPage(pg);
-      var vp=page.getViewport({scale:1.5});
-      var canvas=document.createElement('canvas');
-      canvas.width=vp.width;canvas.height=vp.height;
-      await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
-      var dataUrl=canvas.toDataURL('image/jpeg',0.8);
-      var comp=await hbCompress(dataUrl,1400,0.75);
-      HB_PEND.push({src:comp,ocr:'',title:'Seite '+pg});
-      hbShowProg('Seite '+pg+'/'+total,Math.round(10+pg/total*85));
-    }
-    hbShowProg(null,100);
-    hbShowPreview();
-    toast('PDF: '+total+' Seiten geladen');
-  }catch(ex){
-    hbShowProg(null,0);
-    toast('Fehler: '+ex.message);
-    console.error(ex);
-  }
-}
-
-function hbCompress(dataUrl,maxW,q){
-  return new Promise(function(res){
-    var img=new Image();
-    img.onload=function(){
-      var w=img.width,h=img.height;
-      if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
-      var c=document.createElement('canvas');c.width=w;c.height=h;
-      c.getContext('2d').drawImage(img,0,0,w,h);
-      res(c.toDataURL('image/jpeg',q));
-    };
-    img.src=dataUrl;
-  });
-}
-
-function hbShowProg(txt,pct){
-  var el=document.getElementById('hb-prog');
-  var etxt=document.getElementById('hb-prog-txt');
-  var bar=document.getElementById('hb-prog-bar');
-  if(txt===null){if(el)el.style.display='none';return;}
-  if(el)el.style.display='';
-  if(etxt)etxt.textContent=txt;
-  if(bar)bar.style.width=pct+'%';
-}
-
-function hbShowPreview(){
-  var el=document.getElementById('hb-preview');
-  if(!el)return;
-  el.innerHTML=HB_PEND.map(function(p,i){
-    return '<div style="position:relative"><img src="'+p.src+'" style="width:70px;height:90px;object-fit:cover;border:1px solid #333"><div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);font-size:9px;color:#aaa;text-align:center;padding:2px">'+(i+1)+'</div></div>';
-  }).join('');
-}
-
-async function hbSaveBook(){
-  var title=(document.getElementById('hb-fT')||{}).value||'';
-  if(!title){toast('Titel erforderlich');return;}
-  if(HB_PEND.length===0){toast('Bitte Bilder oder PDF laden');return;}
-  var id='hb_'+Date.now();
-  var book={
-    id:id,
-    title:title,
-    brand:(document.getElementById('hb-fB')||{}).value||'',
-    year:(document.getElementById('hb-fY')||{}).value||'',
-    cat:(document.getElementById('hb-fC')||{}).value||'Allgemein',
-    color:HB_SEL_COLOR,
-    pages:HB_PEND.length,
-    cover:HB_PEND[0]?HB_PEND[0].src:'',
-    ocrCount:0,
-    created:new Date().toISOString().slice(0,10)
-  };
-  await hbDbPut('books',book);
-  for(var i=0;i<HB_PEND.length;i++){
-    await hbDbPut('pages',{pid:id+'_'+i,bookId:id,idx:i,src:HB_PEND[i].src,ocr:HB_PEND[i].ocr||'',title:HB_PEND[i].title||'Seite '+(i+1)});
-  }
-  HB_BOOKS=await hbDbGetAll('books');
-  hbRender();hbUpdateStats();hbPopCatFilter();
-  hbCloseOv('hbAdd');
-  HB_PEND=[];
-  toast('Handbuch gespeichert ('+book.pages+' Seiten)');
-}
-
-async function hbDelBook(id){
-  if(!confirm('Handbuch löschen?'))return;
-  await hbDbDelete('books',id);
-  // Delete pages
-  var pages=await hbDbGetAll('pages');
-  for(var i=0;i<pages.length;i++){
-    if(pages[i].bookId===id) await hbDbDelete('pages',pages[i].pid);
-  }
-  HB_BOOKS=await hbDbGetAll('books');
-  hbRender();hbUpdateStats();
-  toast('Handbuch gelöscht');
-}
-
-async function hbOpenBook(id){
-  var book=null;
-  for(var i=0;i<HB_BOOKS.length;i++)if(HB_BOOKS[i].id===id){book=HB_BOOKS[i];break;}
-  if(!book)return;
-  HB_CUR_BOOK=book;
-  HB_CUR_PAGE=0;
-  var pages=await hbDbGetAll('pages');
-  HB_CUR_BOOK._pages=pages.filter(function(p){return p.bookId===id;}).sort(function(a,b){return a.idx-b.idx;});
-  document.getElementById('hb-book-title').textContent=book.title;
-  document.getElementById('hb-book-info').textContent=(book.brand||'')+(book.year?' · '+book.year:'')+(book.cat?' · '+book.cat:'');
-  hbRenderPage(0);
-  hbShowOv('hbBook');
-}
-
-function hbRenderPage(idx){
-  if(!HB_CUR_BOOK||!HB_CUR_BOOK._pages)return;
-  var pages=HB_CUR_BOOK._pages;
-  HB_CUR_PAGE=Math.max(0,Math.min(idx,pages.length-1));
-  var pg=pages[HB_CUR_PAGE];
-  document.getElementById('hb-page-nr').textContent=(HB_CUR_PAGE+1)+' / '+pages.length;
-  var view=document.getElementById('hb-page-view');
-  if(view&&pg) view.innerHTML='<img src="'+pg.src+'" style="max-width:100%;max-height:calc(100vh - 200px);object-fit:contain">';
-  var ocrEl=document.getElementById('hb-ocr-text');
-  if(ocrEl){ocrEl.textContent=pg&&pg.ocr?pg.ocr:'';ocrEl.style.display=pg&&pg.ocr?'':'none';}
-  // Thumbnail strip
-  var strip=document.getElementById('hb-thumb-strip');
-  if(strip){
-    strip.innerHTML=pages.map(function(p,i){
-      return '<img src="'+p.src+'" onclick="hbRenderPage('+i+')" style="height:50px;width:40px;object-fit:cover;cursor:pointer;border:2px solid '+(i===HB_CUR_PAGE?'#c8391a':'#333')+'">';
-    }).join('');
-  }
-}
-
-function hbNavPage(dir){hbRenderPage(HB_CUR_PAGE+dir);}
-
-function hbCloseBook(){hbCloseOv('hbBook');HB_CUR_BOOK=null;}
-
-async function hbOcrPage(){
-  if(!HB_CUR_BOOK||!HB_CUR_BOOK._pages)return;
-  var pg=HB_CUR_BOOK._pages[HB_CUR_PAGE];
-  if(!pg)return;
-  // Use Tesseract if available, otherwise show placeholder
-  toast('OCR wird gestartet…');
-  try{
-    if(typeof Tesseract==='undefined'){
-      await new Promise(function(res,rej){
-        var s=document.createElement('script');
-        s.src='https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js';
-        s.onload=res;s.onerror=rej;
-        document.head.appendChild(s);
-      });
-    }
-    var result=await Tesseract.recognize(pg.src,'deu+eng');
-    pg.ocr=result.data.text;
-    await hbDbPut('pages',pg);
-    // Update book ocr count
-    HB_CUR_BOOK.ocrCount=(HB_CUR_BOOK.ocrCount||0)+1;
-    await hbDbPut('books',HB_CUR_BOOK);
-    hbRenderPage(HB_CUR_PAGE);
-    toast('OCR abgeschlossen');
-  }catch(ex){
-    toast('OCR Fehler: '+ex.message);
-  }
-}
-
-async function hbDoExport(){
-  toast('Exportiere…');
-  var books=await hbDbGetAll('books');
-  var pages=await hbDbGetAll('pages');
-  var data={source:'RC_KnowHow_Handbuch',exported:new Date().toISOString(),books:books,pages:pages};
-  var blob=new Blob([JSON.stringify(data)],{type:'application/json'});
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='rc-knowhow-handbuch-'+new Date().toISOString().slice(0,10)+'.json';
-  a.click();
-  toast('Export: '+books.length+' Handbücher');
-}
-
-async function hbDoImport(inp){
-  var file=inp.files[0];if(!file)return;
-  var reader=new FileReader();
-  reader.onload=async function(e){
-    try{
-      var data=JSON.parse(e.target.result);
-      var books=data.books||[];
-      var pages=data.pages||[];
-      for(var i=0;i<books.length;i++) await hbDbPut('books',books[i]);
-      for(var i=0;i<pages.length;i++) await hbDbPut('pages',pages[i]);
-      HB_BOOKS=await hbDbGetAll('books');
-      hbRender();hbUpdateStats();hbPopCatFilter();
-      toast('Importiert: '+books.length+' Handbücher, '+pages.length+' Seiten');
-    }catch(ex){toast('Fehler: '+ex.message);}
-  };
-  reader.readAsText(file,'UTF-8');
-}
-
+// ══ HANDBUCH MODULE ══
+var HB_BOOKS=[],HB_PEND=[],HB_CUR=null,HB_PG=0,HB_INIT=false;
+function hbDB(){return new Promise(function(res,rej){var r=indexedDB.open('rc_kh_v1',1);r.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('books'))d.createObjectStore('books',{keyPath:'id'});if(!d.objectStoreNames.contains('pages'))d.createObjectStore('pages',{keyPath:'pid'});};r.onsuccess=function(e){res(e.target.result);};r.onerror=rej;});}
+function hbGetAll(s){return hbDB().then(function(db){return new Promise(function(res,rej){var tx=db.transaction(s,'readonly');var q=tx.objectStore(s).getAll();q.onsuccess=function(){res(q.result);};q.onerror=rej;});});}
+function hbPut(s,o){return hbDB().then(function(db){return new Promise(function(res,rej){var tx=db.transaction(s,'readwrite');tx.objectStore(s).put(o);tx.oncomplete=res;tx.onerror=rej;});});}
+function hbDel(s,k){return hbDB().then(function(db){return new Promise(function(res,rej){var tx=db.transaction(s,'readwrite');tx.objectStore(s).delete(k);tx.oncomplete=res;tx.onerror=rej;});});}
+async function hbInit(){HB_BOOKS=await hbGetAll('books');hbRender();hbStats();hbCats();}
+function hbStats(){var c=document.getElementById('hb-cnt'),p=document.getElementById('hb-pg');if(c)c.textContent=HB_BOOKS.length;if(p)p.textContent=HB_BOOKS.reduce(function(s,b){return s+(b.pages||0);},0);}
+function hbCats(){var sel=document.getElementById('hb-cat-filter');if(!sel)return;var cats=[];HB_BOOKS.forEach(function(b){if(b.cat&&cats.indexOf(b.cat)<0)cats.push(b.cat);});sel.innerHTML='<option value="">Alle Kategorien</option>'+cats.map(function(c){return '<option>'+c+'</option>';}).join('');}
+function hbRender(){var grid=document.getElementById('hb-grid');if(!grid)return;var q=(document.getElementById('hb-search')||{}).value||'';var cat=(document.getElementById('hb-cat-filter')||{}).value||'';var books=HB_BOOKS.filter(function(b){if(cat&&b.cat!==cat)return false;if(q){var l=q.toLowerCase();return(b.title||'').toLowerCase().indexOf(l)>=0||(b.brand||'').toLowerCase().indexOf(l)>=0;}return true;});if(!books.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:48px;color:#555"><div style="font-size:48px;margin-bottom:12px">&#128218;</div>Noch keine Handb&uuml;cher</div>';return;}grid.innerHTML=books.map(function(b){var cover=b.cover?('<img src="'+b.cover+'" style="width:100%;height:110px;object-fit:cover;display:block">'):'<div style="height:110px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:34px">&#128196;</div>';return '<div onclick="hbOpenBook(\"'+b.id+'\")" style="background:#1e1e1e;border:1px solid #2a2a2a;cursor:pointer;border-top:3px solid #c8391a">'+cover+'<div style="padding:8px"><div style="font-size:10px;font-weight:700;color:#c8391a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px">'+(b.cat||'')+'</div><div style="font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+b.title+'</div><div style="font-size:10px;color:#555;margin-top:2px">'+(b.brand?b.brand+' &middot; ':'')+b.pages+' Seiten'+(b.year?' &middot; '+b.year:'')+'</div></div><div style="display:flex;justify-content:flex-end;padding:3px 8px;border-top:1px solid #222"><button onclick="event.stopPropagation();hbDelBook(\"'+b.id+'\")" style="background:none;border:none;color:#444;cursor:pointer;font-size:11px">&#128465;</button></div></div>';}).join('');}
+function hbOpenAdd(){HB_PEND=[];var p=document.getElementById('hb-preview');if(p)p.innerHTML='';hbShowOv('hbAdd');}
+async function hbLoadImgs(inp){var files=Array.from(inp.files);hbProg('Lade...',0);for(var i=0;i<files.length;i++){var url=await new Promise(function(res){var r=new FileReader();r.onload=function(e){res(e.target.result);};r.readAsDataURL(files[i]);});var c=await hbComp(url,1200,0.82);HB_PEND.push({src:c,ocr:'',title:'Seite '+(HB_PEND.length+1)});hbProg('Bild '+(i+1)+'/'+files.length,Math.round((i+1)/files.length*100));}hbProg(null,0);hbPreview();}
+async function hbLoadPDF(inp){var file=inp.files[0];if(!file)return;hbProg('Lade PDF...',5);try{if(typeof pdfjsLib==='undefined'){await new Promise(function(res,rej){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';s.onload=function(){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';res();};s.onerror=rej;document.head.appendChild(s);});}var ab=await file.arrayBuffer();var pdf=await pdfjsLib.getDocument({data:ab}).promise;var total=pdf.numPages;for(var pg=1;pg<=total;pg++){var page=await pdf.getPage(pg);var vp=page.getViewport({scale:1.5});var cv=document.createElement('canvas');cv.width=vp.width;cv.height=vp.height;await page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;var c=await hbComp(cv.toDataURL('image/jpeg',0.8),1400,0.75);HB_PEND.push({src:c,ocr:'',title:'Seite '+pg});hbProg('Seite '+pg+'/'+total,Math.round(10+pg/total*85));}hbProg(null,0);hbPreview();toast('PDF: '+total+' Seiten');}catch(ex){hbProg(null,0);toast('Fehler: '+ex.message);}}
+function hbComp(d,mw,q){return new Promise(function(res){var img=new Image();img.onload=function(){var w=img.width,h=img.height;if(w>mw){h=Math.round(h*mw/w);w=mw;}var c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',q));};img.src=d;});}
+function hbProg(txt,pct){var el=document.getElementById('hb-prog');if(txt===null){if(el)el.style.display='none';return;}if(el)el.style.display='';var t=document.getElementById('hb-prog-txt');if(t)t.textContent=txt;var b=document.getElementById('hb-prog-bar');if(b)b.style.width=pct+'%';}
+function hbPreview(){var el=document.getElementById('hb-preview');if(!el)return;el.innerHTML=HB_PEND.map(function(p,i){return '<div style="position:relative"><img src="'+p.src+'" style="width:58px;height:78px;object-fit:cover;border:1px solid #333"><div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);font-size:9px;color:#aaa;text-align:center">'+(i+1)+'</div></div>';}).join('');}
+async function hbSaveBook(){var t=(document.getElementById('hb-fT')||{}).value||'';if(!t){toast('Titel erforderlich');return;}if(!HB_PEND.length){toast('Bitte Bilder oder PDF laden');return;}var id='hb_'+Date.now();var book={id:id,title:t,brand:(document.getElementById('hb-fB')||{}).value||'',year:(document.getElementById('hb-fY')||{}).value||'',cat:(document.getElementById('hb-fC')||{}).value||'Allgemein',color:'#c8391a',pages:HB_PEND.length,cover:HB_PEND[0].src,ocrCount:0,created:new Date().toISOString().slice(0,10)};await hbPut('books',book);for(var i=0;i<HB_PEND.length;i++)await hbPut('pages',{pid:id+'_'+i,bookId:id,idx:i,src:HB_PEND[i].src,ocr:'',title:HB_PEND[i].title});HB_BOOKS=await hbGetAll('books');hbRender();hbStats();hbCats();hbCloseOv('hbAdd');HB_PEND=[];toast('Handbuch gespeichert ('+book.pages+' Seiten)');}
+async function hbDelBook(id){if(!confirm('Löschen?'))return;await hbDel('books',id);var pages=await hbGetAll('pages');for(var i=0;i<pages.length;i++)if(pages[i].bookId===id)await hbDel('pages',pages[i].pid);HB_BOOKS=await hbGetAll('books');hbRender();hbStats();toast('Gelöscht');}
+async function hbOpenBook(id){var book=null;for(var i=0;i<HB_BOOKS.length;i++)if(HB_BOOKS[i].id===id){book=HB_BOOKS[i];break;}if(!book)return;HB_CUR=book;HB_PG=0;var pages=await hbGetAll('pages');HB_CUR._pages=pages.filter(function(p){return p.bookId===id;}).sort(function(a,b){return a.idx-b.idx;});document.getElementById('hb-book-title').textContent=book.title;document.getElementById('hb-book-info').textContent=(book.brand||'')+(book.year?' · '+book.year:'')+(book.cat?' · '+book.cat:'');hbPage(0);hbShowOv('hbBook');}
+function hbPage(idx){if(!HB_CUR||!HB_CUR._pages)return;var pages=HB_CUR._pages;HB_PG=Math.max(0,Math.min(idx,pages.length-1));var pg=pages[HB_PG];document.getElementById('hb-page-nr').textContent=(HB_PG+1)+' / '+pages.length;var v=document.getElementById('hb-page-view');if(v&&pg)v.innerHTML='<img src="'+pg.src+'" style="max-width:100%;object-fit:contain">';var o=document.getElementById('hb-ocr-text');if(o){o.textContent=pg&&pg.ocr?pg.ocr:'';o.style.display=pg&&pg.ocr?'':'none';}var strip=document.getElementById('hb-thumb-strip');if(strip)strip.innerHTML=pages.map(function(p,i){return '<img src="'+p.src+'" onclick="hbPage('+i+')" style="height:44px;width:34px;object-fit:cover;cursor:pointer;border:2px solid '+(i===HB_PG?'#c8391a':'#333')+';">';}).join('');}
+function hbNavPage(d){hbPage(HB_PG+d);}
+function hbCloseBook(){hbCloseOv('hbBook');HB_CUR=null;}
+async function hbOcrPage(){if(!HB_CUR||!HB_CUR._pages)return;var pg=HB_CUR._pages[HB_PG];if(!pg)return;toast('OCR…');try{if(typeof Tesseract==='undefined'){await new Promise(function(res,rej){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});}var r=await Tesseract.recognize(pg.src,'deu+eng');pg.ocr=r.data.text;await hbPut('pages',pg);hbPage(HB_PG);toast('OCR fertig');}catch(ex){toast('OCR Fehler: '+ex.message);}}
+async function hbDoExport(){toast('Exportiere…');var b=await hbGetAll('books');var p=await hbGetAll('pages');var blob=new Blob([JSON.stringify({source:'RC_KnowHow',exported:new Date().toISOString(),books:b,pages:p})],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rc-knowhow-'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('Export: '+b.length+' Handbücher');}
+async function hbDoImport(inp){var file=inp.files[0];if(!file)return;var reader=new FileReader();reader.onload=async function(e){try{var data=JSON.parse(e.target.result);for(var i=0;i<(data.books||[]).length;i++)await hbPut('books',data.books[i]);for(var i=0;i<(data.pages||[]).length;i++)await hbPut('pages',data.pages[i]);HB_BOOKS=await hbGetAll('books');hbRender();hbStats();hbCats();toast('Importiert: '+(data.books||[]).length+' Handbücher');}catch(ex){toast('Fehler: '+ex.message);}};reader.readAsText(file,'UTF-8');}
 function hbShowOv(id){var el=document.getElementById(id);if(el)el.style.display='';}
 function hbCloseOv(id){var el=document.getElementById(id);if(el)el.style.display='none';}
-function hbOpenOv(id){hbShowOv(id);}
-
-// Init when Handbuch tab is opened
-var HB_INITIALIZED=false;
-var _origShowTab=showTab;
-function showTab(t){
-  _origShowTab(t);
-  if(t==='handbuch'&&!HB_INITIALIZED){HB_INITIALIZED=true;hbInit();}
-}
+var _hbST=showTab;function showTab(t){_hbST(t);if(t==='handbuch'&&!HB_INIT){HB_INIT=true;hbInit();}}
 
 </script>
-
 <!-- ═══ HANDBÜCHER ═══ -->
-<div id="p-handbuch" style="display:none">
-  <div style="padding:12px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-      <div>
-        <div class="sec-t" style="font-size:16px;font-weight:700">&#128218; Handbücher & PDFs</div>
-        <div style="font-size:11px;color:#888;margin-top:2px"><b id="hb-cnt">0</b> Handbücher · <b id="hb-pg">0</b> Seiten · <b id="hb-ocr">0</b> OCR</div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="rb" onclick="hbOpenAdd()">+ Handbuch</button>
-        <button class="rb" style="background:#333" onclick="hbOpenOv('hbIE')">&#8645; Export/Import</button>
-      </div>
-    </div>
-    <!-- Search + filter -->
-    <div style="display:flex;gap:8px;margin-bottom:12px">
-      <input id="hb-search" type="text" class="finp" placeholder="Handbücher suchen…" oninput="hbSearch()" style="flex:1">
-      <select id="hb-cat-filter" class="fsel" onchange="hbSearch()" style="width:140px;background:#1a1a1a;color:#ddd;border:1px solid #333;padding:8px">
-        <option value="">Alle Kategorien</option>
-      </select>
-    </div>
-    <!-- Books grid -->
-    <div id="hb-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px"></div>
+<div id="p-handbuch" style="display:none"><div style="padding:12px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <div><div style="font-size:16px;font-weight:700;color:#eee">&#128218; Handb&uuml;cher &amp; PDFs</div><div style="font-size:11px;color:#888;margin-top:2px"><b id="hb-cnt">0</b> Handb&uuml;cher &middot; <b id="hb-pg">0</b> Seiten</div></div>
+    <div style="display:flex;gap:8px"><button class="rb" onclick="hbOpenAdd()">+ Handbuch</button><button class="rb" style="background:#333" onclick="hbShowOv('hbIE')">&#8645; Export/Import</button></div>
   </div>
-</div>
-
-<!-- Handbuch Add Overlay -->
-<div class="ov" id="hbAdd" style="display:none">
-  <div class="sheet">
-    <div class="hdl"></div>
-    <div class="sc">
-      <div class="sh-title">Neues Handbuch</div>
-      <div class="fg"><label>Titel *</label><input type="text" id="hb-fT" placeholder="z.B. Werkstatthandbuch W107"></div>
-      <div class="fg"><label>Hersteller</label><input type="text" id="hb-fB" placeholder="z.B. Mercedes-Benz"></div>
-      <div class="fg"><label>Jahr</label><input type="text" id="hb-fY" placeholder="z.B. 1971-1989"></div>
-      <div class="fg"><label>Kategorie</label>
-        <select id="hb-fC">
-          <option>Mercedes-Benz</option><option>BMW</option><option>Porsche</option>
-          <option>Elektrik</option><option>Motor</option><option>Getriebe</option>
-          <option>Karosserie</option><option>Fahrwerk</option><option>Allgemein</option>
-        </select>
-      </div>
-      <div class="fg"><label>Farbe</label>
-        <div id="hb-colors" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0">
-        <div class="ubtn" onclick="document.getElementById('hb-fF').click()">
-          <div class="uzi">🖼</div><p>Bilder</p><small>JPG / PNG</small>
-        </div>
-        <div class="ubtn" onclick="document.getElementById('hb-fPDF').click()">
-          <div class="uzi">📄</div><p>PDF</p><small>Wird in Seiten umgewandelt</small>
-        </div>
-      </div>
-      <input type="file" id="hb-fF" accept="image/*" multiple style="display:none" onchange="hbLoadImgs(this)">
-      <input type="file" id="hb-fPDF" accept=".pdf,application/pdf" style="display:none" onchange="hbLoadPDF(this)">
-      <div id="hb-prog" style="display:none;margin:12px 0">
-        <div style="font-size:12px;color:#888;margin-bottom:4px" id="hb-prog-txt">Verarbeite…</div>
-        <div style="background:#333;height:6px"><div id="hb-prog-bar" style="height:100%;background:var(--r);width:0%;transition:width .3s"></div></div>
-      </div>
-      <div id="hb-preview" style="display:flex;flex-wrap:wrap;gap:4px;margin:10px 0;max-height:200px;overflow-y:auto"></div>
-      <button class="rb" style="width:100%;padding:14px;font-size:14px" onclick="hbSaveBook()">Handbuch speichern</button>
-    </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <input id="hb-search" type="text" class="finp" placeholder="Suchen&hellip;" oninput="hbRender()" style="flex:1">
+    <select id="hb-cat-filter" onchange="hbRender()" style="background:#1a1a1a;color:#ddd;border:1px solid #333;padding:8px 12px;min-width:130px"><option value="">Alle Kategorien</option></select>
   </div>
-</div>
-
-<!-- Handbuch Viewer -->
-<div class="ov" id="hbBook" style="display:none;background:#111">
-  <div style="position:relative;height:100%;display:flex;flex-direction:column">
-    <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#1a1a1a;border-bottom:1px solid #333">
-      <button onclick="hbCloseBook()" style="background:none;border:none;color:#ddd;font-size:20px;cursor:pointer">&#8592;</button>
-      <div style="flex:1">
-        <div id="hb-book-title" style="font-size:14px;font-weight:700;color:#fff"></div>
-        <div id="hb-book-info" style="font-size:11px;color:#888"></div>
-      </div>
-      <div id="hb-page-nav" style="display:flex;align-items:center;gap:8px">
-        <button onclick="hbNavPage(-1)" style="background:#333;border:none;color:#ddd;padding:6px 12px;cursor:pointer">&#8249;</button>
-        <span id="hb-page-nr" style="font-size:12px;color:#aaa"></span>
-        <button onclick="hbNavPage(1)" style="background:#333;border:none;color:#ddd;padding:6px 12px;cursor:pointer">&#8250;</button>
-      </div>
-      <button onclick="hbOcrPage()" style="background:#333;border:none;color:#aaa;padding:6px 10px;font-size:11px;cursor:pointer">OCR</button>
-    </div>
-    <div id="hb-page-view" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:16px;gap:12px"></div>
-    <div id="hb-ocr-text" style="display:none;background:#1a1a1a;padding:12px;font-size:11px;color:#ccc;max-height:200px;overflow-y:auto;border-top:1px solid #333"></div>
-    <div style="padding:10px;background:#1a1a1a;border-top:1px solid #333">
-      <div id="hb-thumb-strip" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px"></div>
-    </div>
+  <div id="hb-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px"></div>
+</div></div>
+<div class="ov" id="hbAdd" style="display:none"><div class="sheet"><div class="hdl"></div><div class="sc">
+  <div class="sh-title">Neues Handbuch</div>
+  <div class="fg"><label>Titel *</label><input type="text" id="hb-fT" placeholder="z.B. Werkstatthandbuch W107"></div>
+  <div class="fg"><label>Hersteller</label><input type="text" id="hb-fB" placeholder="z.B. Mercedes-Benz"></div>
+  <div class="fg"><label>Jahr</label><input type="text" id="hb-fY" placeholder="z.B. 1971-1989"></div>
+  <div class="fg"><label>Kategorie</label><select id="hb-fC"><option>Mercedes-Benz</option><option>BMW</option><option>Porsche</option><option>Elektrik</option><option>Motor</option><option>Getriebe</option><option>Karosserie</option><option>Fahrwerk</option><option>Allgemein</option></select></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0">
+    <div class="ubtn" onclick="document.getElementById('hb-fF').click()"><div class="uzi">&#128444;</div><p>Bilder</p><small>JPG / PNG</small></div>
+    <div class="ubtn" onclick="document.getElementById('hb-fPDF').click()"><div class="uzi">&#128196;</div><p>PDF</p><small>In Seiten umgewandelt</small></div>
   </div>
-</div>
-
-<!-- Handbuch Export/Import -->
-<div class="ov" id="hbIE" style="display:none">
-  <div class="sheet">
-    <div class="hdl"></div>
-    <div class="sc">
-      <div class="sh-title">&#8645; Export / Import</div>
-      <p style="font-size:12px;color:#888;margin-bottom:16px">Handbücher werden als komprimiertes JSON mit allen Seiten gespeichert. Daten bleiben dauerhaft auf deinem Gerät (IndexedDB).</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-        <div class="ieo" onclick="hbDoExport()"><span style="font-size:24px">📤</span><div><div style="font-weight:700;margin-bottom:3px">Exportieren</div><div style="font-size:11px;color:#aaa">Alle Handbücher sichern</div></div></div>
-        <label class="ieo"><span style="font-size:24px">📥</span><div><div style="font-weight:700;margin-bottom:3px">Importieren</div><div style="font-size:11px;color:#aaa">Backup laden</div></div><input type="file" accept=".json" style="display:none" onchange="hbDoImport(this)"></label>
-      </div>
-      <button class="rb" style="width:100%" onclick="hbCloseOv('hbIE')">Schließen</button>
-    </div>
+  <input type="file" id="hb-fF" accept="image/*" multiple style="display:none" onchange="hbLoadImgs(this)">
+  <input type="file" id="hb-fPDF" accept=".pdf,application/pdf" style="display:none" onchange="hbLoadPDF(this)">
+  <div id="hb-prog" style="display:none;margin:12px 0"><div style="font-size:12px;color:#888;margin-bottom:4px" id="hb-prog-txt">Verarbeite&hellip;</div><div style="background:#333;height:6px"><div id="hb-prog-bar" style="height:100%;background:#c8391a;width:0%;transition:width .3s"></div></div></div>
+  <div id="hb-preview" style="display:flex;flex-wrap:wrap;gap:4px;margin:10px 0;max-height:175px;overflow-y:auto"></div>
+  <button class="rb" style="width:100%;padding:13px;font-size:14px;margin-top:8px" onclick="hbSaveBook()">Handbuch speichern</button>
+</div></div></div>
+<div class="ov" id="hbBook" style="display:none;background:#0d0d0d"><div style="height:100%;display:flex;flex-direction:column">
+  <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:#1a1a1a;border-bottom:1px solid #333;flex-shrink:0">
+    <button onclick="hbCloseBook()" style="background:none;border:none;color:#ddd;font-size:22px;cursor:pointer">&#8592;</button>
+    <div style="flex:1"><div id="hb-book-title" style="font-size:14px;font-weight:700;color:#fff"></div><div id="hb-book-info" style="font-size:10px;color:#666"></div></div>
+    <button onclick="hbNavPage(-1)" style="background:#222;border:1px solid #333;color:#ddd;padding:6px 14px;cursor:pointer;font-size:18px">&#8249;</button>
+    <span id="hb-page-nr" style="font-size:12px;color:#aaa;min-width:65px;text-align:center"></span>
+    <button onclick="hbNavPage(1)" style="background:#222;border:1px solid #333;color:#ddd;padding:6px 14px;cursor:pointer;font-size:18px">&#8250;</button>
+    <button onclick="hbOcrPage()" style="background:#222;border:1px solid #333;color:#888;padding:5px 10px;font-size:11px;cursor:pointer">OCR</button>
   </div>
-</div>
-
+  <div id="hb-page-view" style="flex:1;overflow-y:auto;display:flex;justify-content:center;padding:10px;background:#0d0d0d"></div>
+  <div id="hb-ocr-text" style="display:none;background:#1a1a1a;padding:12px;font-size:11px;color:#ccc;max-height:130px;overflow-y:auto;border-top:1px solid #333;white-space:pre-wrap"></div>
+  <div style="padding:6px 10px;background:#1a1a1a;border-top:1px solid #333;flex-shrink:0"><div id="hb-thumb-strip" style="display:flex;gap:4px;overflow-x:auto;padding-bottom:2px"></div></div>
+</div></div>
+<div class="ov" id="hbIE" style="display:none"><div class="sheet"><div class="hdl"></div><div class="sc">
+  <div class="sh-title">&#8645; Export / Import</div>
+  <p style="font-size:12px;color:#888;margin-bottom:16px">Alle Handb&uuml;cher als JSON sichern (IndexedDB).</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+    <div class="ieo" onclick="hbDoExport()"><span style="font-size:28px">&#128228;</span><div><div style="font-weight:700;margin-bottom:2px">Exportieren</div><div style="font-size:11px;color:#aaa">Alle Handb&uuml;cher</div></div></div>
+    <label class="ieo"><span style="font-size:28px">&#128229;</span><div><div style="font-weight:700;margin-bottom:2px">Importieren</div><div style="font-size:11px;color:#aaa">Backup laden</div></div><input type="file" accept=".json" style="display:none" onchange="hbDoImport(this)"></label>
+  </div>
+  <button class="rb" style="width:100%" onclick="hbCloseOv('hbIE')">Schlie&szlig;en</button>
+</div></div></div>
 </body>
 </html>
