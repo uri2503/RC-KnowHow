@@ -306,8 +306,10 @@ function buildPrint(steps, query){
 }
 
 function openPrint(html){
-  document.getElementById('pframe').srcdoc = html;
-  document.getElementById('printoverlay').classList.add('on');
+  var w=window.open('','_blank','width=800,height=900');
+  w.document.write(html);
+  w.document.close();
+  setTimeout(function(){w.focus();w.print();},400);
 }
 
 // ═══════════════════════════════════════════════════════════
