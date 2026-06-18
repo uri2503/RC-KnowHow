@@ -995,6 +995,30 @@ async function hbOpenBook(id){var book=null;for(var i=0;i<HB_BOOKS.length;i++)if
 function hbPage(idx){if(!HB_CUR||!HB_CUR._pages)return;var pages=HB_CUR._pages;HB_PG=Math.max(0,Math.min(idx,pages.length-1));var pg=pages[HB_PG];document.getElementById('hb-page-nr').textContent=(HB_PG+1)+' / '+pages.length;var v=document.getElementById('hb-page-view');if(v&&pg)v.innerHTML='<img src="'+pg.src+'" style="max-width:100%;max-height:70vh;object-fit:contain">';var strip=document.getElementById('hb-thumb-strip');if(strip)strip.innerHTML=pages.map(function(p,i){return '<img src="'+p.src+'" onclick="hbPage('+i+')" style="height:44px;width:34px;object-fit:cover;cursor:pointer;border:2px solid '+(i===HB_PG?'#c8391a':'#333')+';">';}).join('');}
 function hbNavPage(d){hbPage(HB_PG+d);}
 function hbCloseBook(){document.getElementById('hbBook').style.display='none';HB_CUR=null;}
+async function hbOcrPage(){
+  if(!HB_CUR||!HB_CUR._pages)return;
+  var pg=HB_CUR._pages[HB_PG];if(!pg)return;
+  var btn=event.target;btn.textContent='...';btn.disabled=true;
+  try{
+    if(typeof Tesseract==='undefined'){
+      await new Promise(function(res,rej){
+        var s=document.createElement('script');
+        s.src='https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js';
+        s.onload=res;s.onerror=rej;document.head.appendChild(s);
+      });
+    }
+    var result=await Tesseract.recognize(pg.src,'deu+eng');
+    pg.ocr=result.data.text;
+    await hbPut('pages',pg);
+    var el=document.getElementById('hb-ocr-text');
+    if(el){el.textContent=pg.ocr;el.style.display=pg.ocr?'':'none';}
+    btn.textContent='OCR ✓';
+  }catch(ex){
+    btn.textContent='OCR';btn.disabled=false;
+    alert('OCR Fehler: '+ex.message);
+  }
+}
+
 async function hbDoExport(){var b=await hbGetAll('books');var p=await hbGetAll('pages');var blob=new Blob([JSON.stringify({source:'RC_KnowHow',books:b,pages:p})],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rc-knowhow-'+new Date().toISOString().slice(0,10)+'.json';a.click();}
 async function hbDoImport(inp){var file=inp.files[0];if(!file)return;var reader=new FileReader();reader.onload=async function(e){try{var data=JSON.parse(e.target.result);for(var i=0;i<(data.books||[]).length;i++)await hbPut('books',data.books[i]);for(var i=0;i<(data.pages||[]).length;i++)await hbPut('pages',data.pages[i]);HB_BOOKS=await hbGetAll('books');hbRender();hbStats();hbCats();alert('Importiert!');}catch(ex){alert('Fehler: '+ex.message);}};reader.readAsText(file,'UTF-8');}
 function hbShowOv(id){document.getElementById(id).style.display='flex';}
@@ -1045,8 +1069,10 @@ window.addEventListener('DOMContentLoaded',function(){
     <button onclick="hbNavPage(-1)" style="background:#222;border:1px solid #333;color:#ddd;padding:6px 14px;cursor:pointer;font-size:18px;border-radius:6px">&#8249;</button>
     <span id="hb-page-nr" style="font-size:12px;color:#aaa;min-width:60px;text-align:center"></span>
     <button onclick="hbNavPage(1)" style="background:#222;border:1px solid #333;color:#ddd;padding:6px 14px;cursor:pointer;font-size:18px;border-radius:6px">&#8250;</button>
+    <button onclick="hbOcrPage()" style="background:#222;border:1px solid #333;color:#888;padding:6px 10px;font-size:11px;cursor:pointer;border-radius:6px">OCR</button>
   </div>
   <div id="hb-page-view" style="flex:1;overflow-y:auto;display:flex;justify-content:center;padding:10px;background:#0d0d0d"></div>
+  <div id="hb-ocr-text" style="display:none;background:#1a1a1a;padding:12px;font-size:11px;color:#ccc;max-height:140px;overflow-y:auto;border-top:1px solid #333;white-space:pre-wrap;flex-shrink:0"></div>
   <div style="padding:6px 10px;background:#1a1a1a;border-top:1px solid #333;flex-shrink:0"><div id="hb-thumb-strip" style="display:flex;gap:4px;overflow-x:auto;padding-bottom:2px"></div></div>
 </div></div>
 
