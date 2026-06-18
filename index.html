@@ -46,26 +46,6 @@ button{font-family:inherit;cursor:pointer;border-radius:8px;font-weight:600;bord
 .fu{animation:fu .25s ease}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{animation:spin .8s linear infinite}
-
-.ubtn{background:#1e1e1e;border:1px solid #333;padding:18px 10px;text-align:center;cursor:pointer;border-radius:4px}
-.ubtn .uzi{font-size:30px;margin-bottom:5px}
-.ubtn p{font-weight:700;color:#ddd;margin:0}
-.ubtn small{font-size:10px;color:#666}
-
-/* Overlay / Sheet system */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:flex-end;justify-content:center}
-.sheet{background:#1a1a1a;width:100%;max-width:600px;max-height:92vh;border-radius:18px 18px 0 0;overflow:hidden;display:flex;flex-direction:column}
-.hdl{width:38px;height:4px;background:#333;border-radius:2px;margin:12px auto 0}
-.sc{overflow-y:auto;padding:18px 16px 32px;flex:1}
-.sh-title{font-size:17px;font-weight:700;color:#fff;margin-bottom:18px}
-.fg{margin-bottom:13px}
-.fg label{display:block;font-size:12px;color:#888;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.fg input,.fg select,.fg textarea{width:100%;background:#111;border:1px solid #2a2a2a;color:#e0e0e0;padding:10px 12px;font-size:14px;border-radius:8px;font-family:inherit}
-.fg textarea{min-height:70px;resize:vertical}
-.finp{background:#111;border:1px solid #2a2a2a;color:#e0e0e0;padding:10px 12px;font-size:14px;border-radius:8px;font-family:inherit;width:100%}
-.ieo{background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer}
-.ieo:active{background:#1a1a1a}
-
 </style>
 </head>
 <body>
@@ -84,7 +64,6 @@ button{font-family:inherit;cursor:pointer;border-radius:8px;font-weight:600;bord
   </div>
   <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
     <button class="xb" style="padding:6px 11px;font-size:12px" onclick="exportData()">&#128190; Sichern</button>
-    <a href="https://uri2503.github.io/RC-Restore/" target="_blank" class="hbtn" style="text-decoration:none;background:#1e3a4c">&#128279; RC Restore</a>
     <button class="xb" style="padding:6px 11px;font-size:12px" onclick="document.getElementById('imp').click()">&#128228; Laden</button>
     <input type="file" id="imp" accept=".json" style="display:none" onchange="importData(this)"/>
     <div style="display:flex;align-items:center;gap:5px">
@@ -237,19 +216,31 @@ button{font-family:inherit;cursor:pointer;border-radius:8px;font-weight:600;bord
   </div>
 </div>
 
-<div id="p-handbuch" style="display:none"><div style="padding:12px">
+<!-- ═══ TEILESUCHE ═══ -->
+
+<div id="p-handbuch" style="display:none">
+<div style="padding:12px">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-    <div><div style="font-size:16px;font-weight:700;color:#eee">&#128218; Handb&uuml;cher &amp; PDFs</div><div style="font-size:11px;color:#888;margin-top:2px"><b id="hb-cnt">0</b> Handb&uuml;cher &middot; <b id="hb-pg">0</b> Seiten</div></div>
-    <div style="display:flex;gap:8px"><button class="rb" onclick="hbOpenAdd()">+ Handbuch</button><button class="rb" style="background:#333" onclick="hbShowOv('hbIE')">&#8645; Export/Import</button></div>
+    <div>
+      <div style="font-size:16px;font-weight:700;color:#eee">&#128218; Handb&uuml;cher &amp; PDFs</div>
+      <div style="font-size:11px;color:#888;margin-top:2px"><b id="hb-cnt">0</b> Handb&uuml;cher &middot; <b id="hb-pg">0</b> Seiten</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="rb" onclick="hbOpenAdd()">+ Handbuch</button>
+      <button class="rb" style="background:#333" onclick="hbShowOv('hbIE')">&#8645; Export/Import</button>
+    </div>
   </div>
   <div style="display:flex;gap:8px;margin-bottom:12px">
-    <input id="hb-search" type="text" class="finp" placeholder="Suchen&hellip;" oninput="hbRender()" style="flex:1">
-    <select id="hb-cat-filter" onchange="hbRender()" style="background:#1a1a1a;color:#ddd;border:1px solid #333;padding:8px 12px;min-width:130px"><option value="">Alle Kategorien</option></select>
+    <input id="hb-search" type="text" placeholder="Suchen&hellip;" oninput="hbRender()" style="flex:1;background:#111;border:1px solid #2a2a2a;color:#e0e0e0;padding:10px 12px;font-size:14px;border-radius:8px">
+    <select id="hb-cat-filter" onchange="hbRender()" style="background:#111;color:#ddd;border:1px solid #2a2a2a;padding:8px 12px;border-radius:8px;min-width:130px">
+      <option value="">Alle Kategorien</option>
+    </select>
   </div>
   <div id="hb-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px"></div>
-</div></div>
+</div>
+</div>
 
-<!-- ═══ TEILESUCHE ═══ -->
+
 <script>
 // ═══════════════════════════════════════════════════════════
 // STORAGE
@@ -332,12 +323,7 @@ function buildPrint(steps, query){
     +'<div style="margin-top:14px;padding-top:8px;border-top:1px solid #eee;font-size:8px;color:#aaa">RC Know-How</div></body></html>';
 }
 
-function openPrint(html){
-  var w=window.open('','_blank','width=800,height=900');
-  w.document.write(html);
-  w.document.close();
-  setTimeout(function(){w.focus();w.print();},400);
-}
+function openPrint(html){var w=window.open('','_blank','width=800,height=900');w.document.write(html);w.document.close();setTimeout(function(){w.focus();w.print();},400);}
 
 // ═══════════════════════════════════════════════════════════
 // REPAIR GUIDE DATABASE
@@ -985,8 +971,10 @@ window.addEventListener('DOMContentLoaded', function(){
     SS('ag_saved',ST.saved);SS('ag_vids',ST.videos);SS('ag_cats',ST.userCats);
   });
 });
+</script>
 
-// ══ HANDBUCH MODULE ══
+<script>
+// HANDBUCH MODULE
 var HB_BOOKS=[],HB_PEND=[],HB_CUR=null,HB_PG=0,HB_INIT=false;
 function hbDB(){return new Promise(function(res,rej){var r=indexedDB.open('rc_kh_v1',1);r.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('books'))d.createObjectStore('books',{keyPath:'id'});if(!d.objectStoreNames.contains('pages'))d.createObjectStore('pages',{keyPath:'pid'});};r.onsuccess=function(e){res(e.target.result);};r.onerror=rej;});}
 function hbGetAll(s){return hbDB().then(function(db){return new Promise(function(res,rej){var tx=db.transaction(s,'readonly');var q=tx.objectStore(s).getAll();q.onsuccess=function(){res(q.result);};q.onerror=rej;});});}
@@ -995,66 +983,83 @@ function hbDel(s,k){return hbDB().then(function(db){return new Promise(function(
 async function hbInit(){HB_BOOKS=await hbGetAll('books');hbRender();hbStats();hbCats();}
 function hbStats(){var c=document.getElementById('hb-cnt'),p=document.getElementById('hb-pg');if(c)c.textContent=HB_BOOKS.length;if(p)p.textContent=HB_BOOKS.reduce(function(s,b){return s+(b.pages||0);},0);}
 function hbCats(){var sel=document.getElementById('hb-cat-filter');if(!sel)return;var cats=[];HB_BOOKS.forEach(function(b){if(b.cat&&cats.indexOf(b.cat)<0)cats.push(b.cat);});sel.innerHTML='<option value="">Alle Kategorien</option>'+cats.map(function(c){return '<option>'+c+'</option>';}).join('');}
-function hbRender(){var grid=document.getElementById('hb-grid');if(!grid)return;var q=(document.getElementById('hb-search')||{}).value||'';var cat=(document.getElementById('hb-cat-filter')||{}).value||'';var books=HB_BOOKS.filter(function(b){if(cat&&b.cat!==cat)return false;if(q){var l=q.toLowerCase();return(b.title||'').toLowerCase().indexOf(l)>=0||(b.brand||'').toLowerCase().indexOf(l)>=0;}return true;});if(!books.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:48px;color:#555"><div style="font-size:48px;margin-bottom:12px">&#128218;</div>Noch keine Handb&uuml;cher</div>';return;}grid.innerHTML=books.map(function(b){var cover=b.cover?('<img src="'+b.cover+'" style="width:100%;height:110px;object-fit:cover;display:block">'):'<div style="height:110px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:34px">&#128196;</div>';return '<div onclick="hbOpenBook(\"'+b.id+'\")" style="background:#1e1e1e;border:1px solid #2a2a2a;cursor:pointer;border-top:3px solid #c8391a">'+cover+'<div style="padding:8px"><div style="font-size:10px;font-weight:700;color:#c8391a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px">'+(b.cat||'')+'</div><div style="font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+b.title+'</div><div style="font-size:10px;color:#555;margin-top:2px">'+(b.brand?b.brand+' &middot; ':'')+b.pages+' Seiten'+(b.year?' &middot; '+b.year:'')+'</div></div><div style="display:flex;justify-content:flex-end;padding:3px 8px;border-top:1px solid #222"><button onclick="event.stopPropagation();hbDelBook(\"'+b.id+'\")" style="background:none;border:none;color:#444;cursor:pointer;font-size:11px">&#128465;</button></div></div>';}).join('');}
-function hbOpenAdd(){HB_PEND=[];var p=document.getElementById('hb-preview');if(p)p.innerHTML='';hbShowOv('hbAdd');}
-async function hbLoadImgs(inp){var files=Array.from(inp.files);hbProg('Lade...',0);for(var i=0;i<files.length;i++){var url=await new Promise(function(res){var r=new FileReader();r.onload=function(e){res(e.target.result);};r.readAsDataURL(files[i]);});var c=await hbComp(url,1200,0.82);HB_PEND.push({src:c,ocr:'',title:'Seite '+(HB_PEND.length+1)});hbProg('Bild '+(i+1)+'/'+files.length,Math.round((i+1)/files.length*100));}hbProg(null,0);hbPreview();}
-async function hbLoadPDF(inp){var file=inp.files[0];if(!file)return;hbProg('Lade PDF...',5);try{if(typeof pdfjsLib==='undefined'){await new Promise(function(res,rej){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';s.onload=function(){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';res();};s.onerror=rej;document.head.appendChild(s);});}var ab=await file.arrayBuffer();var pdf=await pdfjsLib.getDocument({data:ab}).promise;var total=pdf.numPages;for(var pg=1;pg<=total;pg++){var page=await pdf.getPage(pg);var vp=page.getViewport({scale:1.5});var cv=document.createElement('canvas');cv.width=vp.width;cv.height=vp.height;await page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;var c=await hbComp(cv.toDataURL('image/jpeg',0.8),1400,0.75);HB_PEND.push({src:c,ocr:'',title:'Seite '+pg});hbProg('Seite '+pg+'/'+total,Math.round(10+pg/total*85));}hbProg(null,0);hbPreview();toast('PDF: '+total+' Seiten');}catch(ex){hbProg(null,0);toast('Fehler: '+ex.message);}}
+function hbRender(){var grid=document.getElementById('hb-grid');if(!grid)return;var q=(document.getElementById('hb-search')||{}).value||'';var cat=(document.getElementById('hb-cat-filter')||{}).value||'';var books=HB_BOOKS.filter(function(b){if(cat&&b.cat!==cat)return false;if(q){var l=q.toLowerCase();return(b.title||'').toLowerCase().indexOf(l)>=0||(b.brand||'').toLowerCase().indexOf(l)>=0;}return true;});if(!books.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:48px;color:#555"><div style="font-size:48px;margin-bottom:12px">&#128218;</div>Noch keine Handbuecher</div>';return;}grid.innerHTML=books.map(function(b){var cover=b.cover?('<img src="'+b.cover+'" style="width:100%;height:110px;object-fit:cover;display:block">'):'<div style="height:110px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:34px">&#128196;</div>';return '<div onclick="hbOpenBook(this.dataset.id)" data-id="'+b.id+'" style="background:#1e1e1e;border:1px solid #2a2a2a;cursor:pointer;border-top:3px solid #c8391a">'+cover+'<div style="padding:8px"><div style="font-size:10px;font-weight:700;color:#c8391a;text-transform:uppercase;margin-bottom:3px">'+(b.cat||'')+'</div><div style="font-size:12px;font-weight:700;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+b.title+'</div><div style="font-size:10px;color:#555;margin-top:2px">'+(b.brand||'')+' '+b.pages+' Seiten</div></div><div style="display:flex;justify-content:flex-end;padding:3px 8px;border-top:1px solid #222"><button onclick="event.stopPropagation();hbDelBook(this.dataset.id)" data-id="'+b.id+'" style="background:none;border:none;color:#444;cursor:pointer">&#128465;</button></div></div>';}).join('');}
+function hbOpenAdd(){HB_PEND=[];var p=document.getElementById('hb-preview');if(p)p.innerHTML='';document.getElementById('hbAdd').style.display='flex';}
+async function hbLoadImgs(inp){var files=Array.from(inp.files);for(var i=0;i<files.length;i++){var url=await new Promise(function(res){var r=new FileReader();r.onload=function(e){res(e.target.result);};r.readAsDataURL(files[i]);});var c=await hbComp(url,1200,0.82);HB_PEND.push({src:c,ocr:'',title:'Seite '+(HB_PEND.length+1)});}hbPreview();}
+async function hbLoadPDF(inp){var file=inp.files[0];if(!file)return;try{if(typeof pdfjsLib==='undefined'){await new Promise(function(res,rej){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';s.onload=function(){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';res();};s.onerror=rej;document.head.appendChild(s);});}var ab=await file.arrayBuffer();var pdf=await pdfjsLib.getDocument({data:ab}).promise;var total=pdf.numPages;for(var pg=1;pg<=total;pg++){var page=await pdf.getPage(pg);var vp=page.getViewport({scale:1.5});var cv=document.createElement('canvas');cv.width=vp.width;cv.height=vp.height;await page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;var c=await hbComp(cv.toDataURL('image/jpeg',0.8),1400,0.75);HB_PEND.push({src:c,ocr:'',title:'Seite '+pg});}hbPreview();alert('PDF: '+total+' Seiten geladen');}catch(ex){alert('PDF Fehler: '+ex.message);}}
 function hbComp(d,mw,q){return new Promise(function(res){var img=new Image();img.onload=function(){var w=img.width,h=img.height;if(w>mw){h=Math.round(h*mw/w);w=mw;}var c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',q));};img.src=d;});}
-function hbProg(txt,pct){var el=document.getElementById('hb-prog');if(txt===null){if(el)el.style.display='none';return;}if(el)el.style.display='';var t=document.getElementById('hb-prog-txt');if(t)t.textContent=txt;var b=document.getElementById('hb-prog-bar');if(b)b.style.width=pct+'%';}
-function hbPreview(){var el=document.getElementById('hb-preview');if(!el)return;el.innerHTML=HB_PEND.map(function(p,i){return '<div style="position:relative"><img src="'+p.src+'" style="width:58px;height:78px;object-fit:cover;border:1px solid #333"><div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);font-size:9px;color:#aaa;text-align:center">'+(i+1)+'</div></div>';}).join('');}
-async function hbSaveBook(){var t=(document.getElementById('hb-fT')||{}).value||'';if(!t){toast('Titel erforderlich');return;}if(!HB_PEND.length){toast('Bitte Bilder oder PDF laden');return;}var id='hb_'+Date.now();var book={id:id,title:t,brand:(document.getElementById('hb-fB')||{}).value||'',year:(document.getElementById('hb-fY')||{}).value||'',cat:(document.getElementById('hb-fC')||{}).value||'Allgemein',color:'#c8391a',pages:HB_PEND.length,cover:HB_PEND[0].src,ocrCount:0,created:new Date().toISOString().slice(0,10)};await hbPut('books',book);for(var i=0;i<HB_PEND.length;i++)await hbPut('pages',{pid:id+'_'+i,bookId:id,idx:i,src:HB_PEND[i].src,ocr:'',title:HB_PEND[i].title});HB_BOOKS=await hbGetAll('books');hbRender();hbStats();hbCats();hbCloseOv('hbAdd');HB_PEND=[];toast('Handbuch gespeichert ('+book.pages+' Seiten)');}
-async function hbDelBook(id){if(!confirm('Löschen?'))return;await hbDel('books',id);var pages=await hbGetAll('pages');for(var i=0;i<pages.length;i++)if(pages[i].bookId===id)await hbDel('pages',pages[i].pid);HB_BOOKS=await hbGetAll('books');hbRender();hbStats();toast('Gelöscht');}
-async function hbOpenBook(id){var book=null;for(var i=0;i<HB_BOOKS.length;i++)if(HB_BOOKS[i].id===id){book=HB_BOOKS[i];break;}if(!book)return;HB_CUR=book;HB_PG=0;var pages=await hbGetAll('pages');HB_CUR._pages=pages.filter(function(p){return p.bookId===id;}).sort(function(a,b){return a.idx-b.idx;});document.getElementById('hb-book-title').textContent=book.title;document.getElementById('hb-book-info').textContent=(book.brand||'')+(book.year?' · '+book.year:'')+(book.cat?' · '+book.cat:'');hbPage(0);hbShowOv('hbBook');}
-function hbPage(idx){if(!HB_CUR||!HB_CUR._pages)return;var pages=HB_CUR._pages;HB_PG=Math.max(0,Math.min(idx,pages.length-1));var pg=pages[HB_PG];document.getElementById('hb-page-nr').textContent=(HB_PG+1)+' / '+pages.length;var v=document.getElementById('hb-page-view');if(v&&pg)v.innerHTML='<img src="'+pg.src+'" style="max-width:100%;object-fit:contain">';var o=document.getElementById('hb-ocr-text');if(o){o.textContent=pg&&pg.ocr?pg.ocr:'';o.style.display=pg&&pg.ocr?'':'none';}var strip=document.getElementById('hb-thumb-strip');if(strip)strip.innerHTML=pages.map(function(p,i){return '<img src="'+p.src+'" onclick="hbPage('+i+')" style="height:44px;width:34px;object-fit:cover;cursor:pointer;border:2px solid '+(i===HB_PG?'#c8391a':'#333')+';">';}).join('');}
+function hbPreview(){var el=document.getElementById('hb-preview');if(!el)return;el.innerHTML=HB_PEND.map(function(p,i){return '<img src="'+p.src+'" style="width:55px;height:75px;object-fit:cover;border:1px solid #333">';}).join('');}
+async function hbSaveBook(){var t=(document.getElementById('hb-fT')||{}).value||'';if(!t){alert('Titel erforderlich');return;}if(!HB_PEND.length){alert('Bitte Bilder oder PDF laden');return;}var id='hb_'+Date.now();var book={id:id,title:t,brand:(document.getElementById('hb-fB')||{}).value||'',year:(document.getElementById('hb-fY')||{}).value||'',cat:(document.getElementById('hb-fC')||{}).value||'Allgemein',color:'#c8391a',pages:HB_PEND.length,cover:HB_PEND[0].src,created:new Date().toISOString().slice(0,10)};await hbPut('books',book);for(var i=0;i<HB_PEND.length;i++)await hbPut('pages',{pid:id+'_'+i,bookId:id,idx:i,src:HB_PEND[i].src,ocr:'',title:HB_PEND[i].title});HB_BOOKS=await hbGetAll('books');hbRender();hbStats();hbCats();document.getElementById('hbAdd').style.display='none';HB_PEND=[];alert('Handbuch gespeichert!');}
+async function hbDelBook(id){if(!confirm('Loeschen?'))return;await hbDel('books',id);var pages=await hbGetAll('pages');for(var i=0;i<pages.length;i++)if(pages[i].bookId===id)await hbDel('pages',pages[i].pid);HB_BOOKS=await hbGetAll('books');hbRender();hbStats();}
+async function hbOpenBook(id){var book=null;for(var i=0;i<HB_BOOKS.length;i++)if(HB_BOOKS[i].id===id){book=HB_BOOKS[i];break;}if(!book)return;HB_CUR=book;HB_PG=0;var pages=await hbGetAll('pages');HB_CUR._pages=pages.filter(function(p){return p.bookId===id;}).sort(function(a,b){return a.idx-b.idx;});document.getElementById('hb-book-title').textContent=book.title;document.getElementById('hb-book-info').textContent=(book.brand||'')+(book.year?' - '+book.year:'')+(book.cat?' - '+book.cat:'');hbPage(0);document.getElementById('hbBook').style.display='flex';}
+function hbPage(idx){if(!HB_CUR||!HB_CUR._pages)return;var pages=HB_CUR._pages;HB_PG=Math.max(0,Math.min(idx,pages.length-1));var pg=pages[HB_PG];document.getElementById('hb-page-nr').textContent=(HB_PG+1)+' / '+pages.length;var v=document.getElementById('hb-page-view');if(v&&pg)v.innerHTML='<img src="'+pg.src+'" style="max-width:100%;max-height:70vh;object-fit:contain">';var strip=document.getElementById('hb-thumb-strip');if(strip)strip.innerHTML=pages.map(function(p,i){return '<img src="'+p.src+'" onclick="hbPage('+i+')" style="height:44px;width:34px;object-fit:cover;cursor:pointer;border:2px solid '+(i===HB_PG?'#c8391a':'#333')+';">';}).join('');}
 function hbNavPage(d){hbPage(HB_PG+d);}
-function hbCloseBook(){hbCloseOv('hbBook');HB_CUR=null;}
-async function hbOcrPage(){if(!HB_CUR||!HB_CUR._pages)return;var pg=HB_CUR._pages[HB_PG];if(!pg)return;toast('OCR…');try{if(typeof Tesseract==='undefined'){await new Promise(function(res,rej){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});}var r=await Tesseract.recognize(pg.src,'deu+eng');pg.ocr=r.data.text;await hbPut('pages',pg);hbPage(HB_PG);toast('OCR fertig');}catch(ex){toast('OCR Fehler: '+ex.message);}}
-async function hbDoExport(){toast('Exportiere…');var b=await hbGetAll('books');var p=await hbGetAll('pages');var blob=new Blob([JSON.stringify({source:'RC_KnowHow',exported:new Date().toISOString(),books:b,pages:p})],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rc-knowhow-'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('Export: '+b.length+' Handbücher');}
-async function hbDoImport(inp){var file=inp.files[0];if(!file)return;var reader=new FileReader();reader.onload=async function(e){try{var data=JSON.parse(e.target.result);for(var i=0;i<(data.books||[]).length;i++)await hbPut('books',data.books[i]);for(var i=0;i<(data.pages||[]).length;i++)await hbPut('pages',data.pages[i]);HB_BOOKS=await hbGetAll('books');hbRender();hbStats();hbCats();toast('Importiert: '+(data.books||[]).length+' Handbücher');}catch(ex){toast('Fehler: '+ex.message);}};reader.readAsText(file,'UTF-8');}
-function hbShowOv(id){var el=document.getElementById(id);if(el)el.style.display='';}
-function hbCloseOv(id){var el=document.getElementById(id);if(el)el.style.display='none';}
-var _hbST=showTab;function showTab(t){_hbST(t);if(t==='handbuch'&&!HB_INIT){HB_INIT=true;hbInit();}}
+function hbCloseBook(){document.getElementById('hbBook').style.display='none';HB_CUR=null;}
+async function hbDoExport(){var b=await hbGetAll('books');var p=await hbGetAll('pages');var blob=new Blob([JSON.stringify({source:'RC_KnowHow',books:b,pages:p})],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rc-knowhow-'+new Date().toISOString().slice(0,10)+'.json';a.click();}
+async function hbDoImport(inp){var file=inp.files[0];if(!file)return;var reader=new FileReader();reader.onload=async function(e){try{var data=JSON.parse(e.target.result);for(var i=0;i<(data.books||[]).length;i++)await hbPut('books',data.books[i]);for(var i=0;i<(data.pages||[]).length;i++)await hbPut('pages',data.pages[i]);HB_BOOKS=await hbGetAll('books');hbRender();hbStats();hbCats();alert('Importiert!');}catch(ex){alert('Fehler: '+ex.message);}};reader.readAsText(file,'UTF-8');}
+function hbShowOv(id){document.getElementById(id).style.display='flex';}
 
+// Hook showTab
+var _origST=window.showTab;
+window.addEventListener('DOMContentLoaded',function(){
+  var _origST2=showTab;
+  window.showTab=function(t){_origST2(t);if(t==='handbuch'&&!HB_INIT){HB_INIT=true;hbInit();}};
+  // rebind tabs
+  document.querySelectorAll('.tab').forEach(function(el){
+    var m=el.getAttribute('onclick');
+    if(m){el.setAttribute('onclick',m);}
+  });
+});
 </script>
 
-<div class="ov" id="hbAdd" style="display:none"><div class="sheet"><div class="hdl"></div><div class="sc">
-  <div class="sh-title">Neues Handbuch</div>
-  <div class="fg"><label>Titel *</label><input type="text" id="hb-fT" placeholder="z.B. Werkstatthandbuch W107"></div>
-  <div class="fg"><label>Hersteller</label><input type="text" id="hb-fB" placeholder="z.B. Mercedes-Benz"></div>
-  <div class="fg"><label>Jahr</label><input type="text" id="hb-fY" placeholder="z.B. 1971-1989"></div>
-  <div class="fg"><label>Kategorie</label><select id="hb-fC"><option>Mercedes-Benz</option><option>BMW</option><option>Porsche</option><option>Elektrik</option><option>Motor</option><option>Getriebe</option><option>Karosserie</option><option>Fahrwerk</option><option>Allgemein</option></select></div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0">
-    <div class="ubtn" onclick="document.getElementById('hb-fF').click()"><div class="uzi">&#128444;</div><p>Bilder</p><small>JPG / PNG</small></div>
-    <div class="ubtn" onclick="document.getElementById('hb-fPDF').click()"><div class="uzi">&#128196;</div><p>PDF</p><small>In Seiten umgewandelt</small></div>
+<style>
+.hb-ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:none;align-items:flex-end;justify-content:center}
+.hb-sheet{background:#1a1a1a;width:100%;max-width:600px;max-height:92vh;border-radius:18px 18px 0 0;overflow-y:auto;padding:20px 16px 32px}
+</style>
+
+<!-- Handbuch Add -->
+<div class="hb-ov" id="hbAdd" style="display:none">
+<div class="hb-sheet">
+  <div style="font-size:17px;font-weight:700;color:#fff;margin-bottom:18px">Neues Handbuch</div>
+  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#888;margin-bottom:4px">TITEL *</label><input type="text" id="hb-fT" placeholder="z.B. Werkstatthandbuch W107" style="width:100%;background:#111;border:1px solid #333;color:#e0e0e0;padding:10px;font-size:14px;border-radius:8px"></div>
+  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#888;margin-bottom:4px">HERSTELLER</label><input type="text" id="hb-fB" placeholder="z.B. Mercedes-Benz" style="width:100%;background:#111;border:1px solid #333;color:#e0e0e0;padding:10px;font-size:14px;border-radius:8px"></div>
+  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#888;margin-bottom:4px">JAHR</label><input type="text" id="hb-fY" placeholder="z.B. 1971-1989" style="width:100%;background:#111;border:1px solid #333;color:#e0e0e0;padding:10px;font-size:14px;border-radius:8px"></div>
+  <div style="margin-bottom:16px"><label style="display:block;font-size:11px;color:#888;margin-bottom:4px">KATEGORIE</label><select id="hb-fC" style="width:100%;background:#111;border:1px solid #333;color:#e0e0e0;padding:10px;font-size:14px;border-radius:8px"><option>Mercedes-Benz</option><option>BMW</option><option>Porsche</option><option>Elektrik</option><option>Motor</option><option>Getriebe</option><option>Karosserie</option><option>Fahrwerk</option><option>Allgemein</option></select></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+    <div onclick="document.getElementById('hb-fF').click()" style="background:#1e1e1e;border:1px solid #333;padding:20px 10px;text-align:center;cursor:pointer;border-radius:8px"><div style="font-size:30px;margin-bottom:5px">&#128444;</div><p style="font-weight:700;color:#ddd;margin:0">Bilder</p><small style="color:#666">JPG / PNG</small></div>
+    <div onclick="document.getElementById('hb-fPDF').click()" style="background:#1e1e1e;border:1px solid #333;padding:20px 10px;text-align:center;cursor:pointer;border-radius:8px"><div style="font-size:30px;margin-bottom:5px">&#128196;</div><p style="font-weight:700;color:#ddd;margin:0">PDF</p><small style="color:#666">In Seiten umgewandelt</small></div>
   </div>
   <input type="file" id="hb-fF" accept="image/*" multiple style="display:none" onchange="hbLoadImgs(this)">
   <input type="file" id="hb-fPDF" accept=".pdf,application/pdf" style="display:none" onchange="hbLoadPDF(this)">
-  <div id="hb-prog" style="display:none;margin:12px 0"><div style="font-size:12px;color:#888;margin-bottom:4px" id="hb-prog-txt">Verarbeite&hellip;</div><div style="background:#333;height:6px"><div id="hb-prog-bar" style="height:100%;background:#c8391a;width:0%;transition:width .3s"></div></div></div>
-  <div id="hb-preview" style="display:flex;flex-wrap:wrap;gap:4px;margin:10px 0;max-height:175px;overflow-y:auto"></div>
-  <button class="rb" style="width:100%;padding:13px;font-size:14px;margin-top:8px" onclick="hbSaveBook()">Handbuch speichern</button>
-</div></div></div>
-<div class="ov" id="hbBook" style="display:none;background:#0d0d0d"><div style="height:100%;display:flex;flex-direction:column">
+  <div id="hb-preview" style="display:flex;flex-wrap:wrap;gap:4px;margin:10px 0;max-height:150px;overflow-y:auto"></div>
+  <button onclick="hbSaveBook()" style="width:100%;padding:13px;font-size:14px;background:#c8391a;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;margin-top:8px">Handbuch speichern</button>
+  <button onclick="document.getElementById('hbAdd').style.display='none'" style="width:100%;padding:10px;font-size:13px;background:transparent;color:#666;border:none;cursor:pointer;margin-top:8px">Abbrechen</button>
+</div></div>
+
+<!-- Handbuch Viewer -->
+<div class="hb-ov" id="hbBook" style="display:none;align-items:stretch">
+<div style="background:#0d0d0d;width:100%;height:100%;display:flex;flex-direction:column">
   <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:#1a1a1a;border-bottom:1px solid #333;flex-shrink:0">
     <button onclick="hbCloseBook()" style="background:none;border:none;color:#ddd;font-size:22px;cursor:pointer">&#8592;</button>
     <div style="flex:1"><div id="hb-book-title" style="font-size:14px;font-weight:700;color:#fff"></div><div id="hb-book-info" style="font-size:10px;color:#666"></div></div>
-    <button onclick="hbNavPage(-1)" style="background:#222;border:1px solid #333;color:#ddd;padding:6px 14px;cursor:pointer;font-size:18px">&#8249;</button>
-    <span id="hb-page-nr" style="font-size:12px;color:#aaa;min-width:65px;text-align:center"></span>
-    <button onclick="hbNavPage(1)" style="background:#222;border:1px solid #333;color:#ddd;padding:6px 14px;cursor:pointer;font-size:18px">&#8250;</button>
-    <button onclick="hbOcrPage()" style="background:#222;border:1px solid #333;color:#888;padding:5px 10px;font-size:11px;cursor:pointer">OCR</button>
+    <button onclick="hbNavPage(-1)" style="background:#222;border:1px solid #333;color:#ddd;padding:6px 14px;cursor:pointer;font-size:18px;border-radius:6px">&#8249;</button>
+    <span id="hb-page-nr" style="font-size:12px;color:#aaa;min-width:60px;text-align:center"></span>
+    <button onclick="hbNavPage(1)" style="background:#222;border:1px solid #333;color:#ddd;padding:6px 14px;cursor:pointer;font-size:18px;border-radius:6px">&#8250;</button>
   </div>
   <div id="hb-page-view" style="flex:1;overflow-y:auto;display:flex;justify-content:center;padding:10px;background:#0d0d0d"></div>
-  <div id="hb-ocr-text" style="display:none;background:#1a1a1a;padding:12px;font-size:11px;color:#ccc;max-height:130px;overflow-y:auto;border-top:1px solid #333;white-space:pre-wrap"></div>
   <div style="padding:6px 10px;background:#1a1a1a;border-top:1px solid #333;flex-shrink:0"><div id="hb-thumb-strip" style="display:flex;gap:4px;overflow-x:auto;padding-bottom:2px"></div></div>
 </div></div>
-<div class="ov" id="hbIE" style="display:none"><div class="sheet"><div class="hdl"></div><div class="sc">
-  <div class="sh-title">&#8645; Export / Import</div>
-  <p style="font-size:12px;color:#888;margin-bottom:16px">Alle Handb&uuml;cher als JSON sichern (IndexedDB).</p>
+
+<!-- Handbuch Export/Import -->
+<div class="hb-ov" id="hbIE" style="display:none">
+<div class="hb-sheet">
+  <div style="font-size:17px;font-weight:700;color:#fff;margin-bottom:18px">&#8645; Export / Import</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-    <div class="ieo" onclick="hbDoExport()"><span style="font-size:28px">&#128228;</span><div><div style="font-weight:700;margin-bottom:2px">Exportieren</div><div style="font-size:11px;color:#aaa">Alle Handb&uuml;cher</div></div></div>
-    <label class="ieo"><span style="font-size:28px">&#128229;</span><div><div style="font-weight:700;margin-bottom:2px">Importieren</div><div style="font-size:11px;color:#aaa">Backup laden</div></div><input type="file" accept=".json" style="display:none" onchange="hbDoImport(this)"></label>
+    <div onclick="hbDoExport()" style="background:#111;border:1px solid #333;border-radius:10px;padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer"><span style="font-size:28px">&#128228;</span><div><div style="font-weight:700;margin-bottom:2px">Exportieren</div><div style="font-size:11px;color:#aaa">Alle Handbuecher</div></div></div>
+    <label style="background:#111;border:1px solid #333;border-radius:10px;padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer"><span style="font-size:28px">&#128229;</span><div><div style="font-weight:700;margin-bottom:2px">Importieren</div><div style="font-size:11px;color:#aaa">Backup laden</div></div><input type="file" accept=".json" style="display:none" onchange="hbDoImport(this)"></label>
   </div>
-  <button class="rb" style="width:100%" onclick="hbCloseOv('hbIE')">Schlie&szlig;en</button>
-</div></div></div>
+  <button onclick="document.getElementById('hbIE').style.display='none'" style="width:100%;padding:10px;font-size:13px;background:#333;color:#ddd;border:none;border-radius:8px;cursor:pointer">Schliessen</button>
+</div></div>
 
 </body>
 </html>
