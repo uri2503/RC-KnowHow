@@ -237,6 +237,18 @@ button{font-family:inherit;cursor:pointer;border-radius:8px;font-weight:600;bord
   </div>
 </div>
 
+<div id="p-handbuch" style="display:none"><div style="padding:12px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <div><div style="font-size:16px;font-weight:700;color:#eee">&#128218; Handb&uuml;cher &amp; PDFs</div><div style="font-size:11px;color:#888;margin-top:2px"><b id="hb-cnt">0</b> Handb&uuml;cher &middot; <b id="hb-pg">0</b> Seiten</div></div>
+    <div style="display:flex;gap:8px"><button class="rb" onclick="hbOpenAdd()">+ Handbuch</button><button class="rb" style="background:#333" onclick="hbShowOv('hbIE')">&#8645; Export/Import</button></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <input id="hb-search" type="text" class="finp" placeholder="Suchen&hellip;" oninput="hbRender()" style="flex:1">
+    <select id="hb-cat-filter" onchange="hbRender()" style="background:#1a1a1a;color:#ddd;border:1px solid #333;padding:8px 12px;min-width:130px"><option value="">Alle Kategorien</option></select>
+  </div>
+  <div id="hb-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px"></div>
+</div></div>
+
 <!-- ═══ TEILESUCHE ═══ -->
 <script>
 // ═══════════════════════════════════════════════════════════
@@ -1004,18 +1016,7 @@ function hbCloseOv(id){var el=document.getElementById(id);if(el)el.style.display
 var _hbST=showTab;function showTab(t){_hbST(t);if(t==='handbuch'&&!HB_INIT){HB_INIT=true;hbInit();}}
 
 </script>
-<!-- ═══ HANDBÜCHER ═══ -->
-<div id="p-handbuch" style="display:none"><div style="padding:12px">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-    <div><div style="font-size:16px;font-weight:700;color:#eee">&#128218; Handb&uuml;cher &amp; PDFs</div><div style="font-size:11px;color:#888;margin-top:2px"><b id="hb-cnt">0</b> Handb&uuml;cher &middot; <b id="hb-pg">0</b> Seiten</div></div>
-    <div style="display:flex;gap:8px"><button class="rb" onclick="hbOpenAdd()">+ Handbuch</button><button class="rb" style="background:#333" onclick="hbShowOv('hbIE')">&#8645; Export/Import</button></div>
-  </div>
-  <div style="display:flex;gap:8px;margin-bottom:12px">
-    <input id="hb-search" type="text" class="finp" placeholder="Suchen&hellip;" oninput="hbRender()" style="flex:1">
-    <select id="hb-cat-filter" onchange="hbRender()" style="background:#1a1a1a;color:#ddd;border:1px solid #333;padding:8px 12px;min-width:130px"><option value="">Alle Kategorien</option></select>
-  </div>
-  <div id="hb-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px"></div>
-</div></div>
+
 <div class="ov" id="hbAdd" style="display:none"><div class="sheet"><div class="hdl"></div><div class="sc">
   <div class="sh-title">Neues Handbuch</div>
   <div class="fg"><label>Titel *</label><input type="text" id="hb-fT" placeholder="z.B. Werkstatthandbuch W107"></div>
@@ -1054,5 +1055,6 @@ var _hbST=showTab;function showTab(t){_hbST(t);if(t==='handbuch'&&!HB_INIT){HB_I
   </div>
   <button class="rb" style="width:100%" onclick="hbCloseOv('hbIE')">Schlie&szlig;en</button>
 </div></div></div>
+
 </body>
 </html>
